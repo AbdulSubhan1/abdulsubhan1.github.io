@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-accent="green">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdul Subhan — Frontend Engineer</title>
+<meta name="description" content="Abdul Subhan — Frontend Engineer. React · Next.js · TypeScript. Building fast, large-scale web apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portfolio/portfolio.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-in pad">
+    <a class="brand" href="#top"><span class="dot"></span>abdul.subhan<span class="blink">_</span></a>
+    <div class="nav-links">
+      <a href="#work"><span class="n">01</span>work</a>
+      <a href="#labs"><span class="n">02</span>labs</a>
+      <a href="#stack"><span class="n">03</span>stack</a>
+      <a href="#about"><span class="n">04</span>about</a>
+      <a href="#contact"><span class="n">05</span>contact</a>
+      <a class="always" href="uploads/AbdulSubhan-frontend-engineer.pdf" target="_blank" rel="noopener" style="padding:0;"><button class="btn-cv">résumé ↓</button></a>
+      <button class="icon-btn always" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">◐</button>
+      <button class="icon-btn always menu-toggle" id="menuToggle" aria-label="Menu">≡</button>
+    </div>
+  </div>
+</nav>
+
+<main class="shell" id="top">
+
+  <!-- HERO -->
+  <header class="hero pad">
+    <div class="kicker">
+      <span class="pulse"></span>
+      <span><span class="ac">frontend engineer</span> · 5 years · karachi → remote / gcc</span>
+    </div>
+    <h1 class="statement">I build fast, large-scale web apps that people actually enjoy using.<span class="cursor"></span></h1>
+
+    <div class="hero-meta">
+      <p class="hero-bio">
+        I'm Abdul Subhan — a frontend engineer who turns complex, content-heavy
+        products into fast, accessible, search-friendly experiences. Most recently
+        I've been shipping a 270+ page insurance platform on Next.js, end to end.
+      </p>
+      <div class="facts">
+        <div class="fact"><span class="k">// focus</span><span class="v">perf · SEO · scale</span></div>
+        <div class="fact"><span class="k">// core</span><span class="v">React · Next.js · TS</span></div>
+        <div class="fact"><span class="k">// status</span><span class="v ac">open to work</span></div>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn solid" href="#work">view selected work →</a>
+      <a class="btn" href="#contact">get in touch</a>
+    </div>
+  </header>
+
+  <!-- WORK -->
+  <section class="section pad" id="work">
+    <div class="rowhead">
+      <span class="tag"><span class="ac">//</span> 01 — selected work</span>
+      <h2 class="h-sec">Products I've shipped</h2>
+    </div>
+
+    <article class="featured reveal">
+      <figure class="shot">
+        <div class="pv-bar"><i></i><i></i><i></i><span class="pv-url">insurancemarket.ae</span></div>
+        <img src="portfolio/img/insurancemarket.png" alt="InsuranceMarket.ae homepage" loading="lazy">
+      </figure>
+      <div>
+        <div class="proj-index">★ featured · 2024 — present</div>
+        <h3 class="proj-title">InsuranceMarket.ae</h3>
+        <div class="proj-role">Frontend Engineer — Remote (Dubai)</div>
+        <p class="proj-desc">
+          A dual-application insurance platform: a 270+ page SEO-driven content site
+          plus a transactional e-commerce system. Routed via Next.js rewrites at the
+          infrastructure level, with headless WordPress (ISR + revalidation),
+          next-intl i18n, and AI-powered OCR for document onboarding.
+        </p>
+        <div class="metrics">
+          <div class="metric"><div class="num">270+</div><div class="cap">pages, SEO-driven</div></div>
+          <div class="metric"><div class="num">v12 → 15</div><div class="cap">Next.js migration</div></div>
+          <div class="metric"><div class="num">i18n</div><div class="cap">page-wise loading</div></div>
+        </div>
+        <div class="chips">
+          <span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">headless CMS</span><span class="chip">ISR</span><span class="chip">next-intl</span><span class="chip">payments</span><span class="chip">OCR</span>
+        </div>
+        <div class="links">
+          <a href="https://insurancemarket.ae" target="_blank" rel="noopener">insurancemarket.ae ↗</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="grid-2">
+      <article class="card reveal">
+        <div class="preview" data-mono="ERP">
+          <div class="pv-bar"><i></i><i></i><i></i><span class="pv-url">erp · procurement / hr</span></div>
+          <div class="pv-body">
+            <div class="pv-rows">
+              <span class="pv-row" style="width:64%;"></span>
+              <span class="pv-row" style="width:88%;"></span>
+              <span class="pv-row" style="width:42%;"></span>
+            </div>
+            <div class="pv-bars"><b style="height:40%;"></b><b style="height:72%;"></b><b style="height:54%;"></b><b style="height:90%;"></b><b style="height:62%;"></b></div>
+          </div>
+        </div>
+        <div class="proj-index">enterprise · data UI</div>
+        <h3 class="proj-title" style="font-size:24px;">ERP Dashboards</h3>
+        <div class="proj-role">Procurement &amp; HR modules</div>
+        <p class="proj-desc">
+          Data-intensive React interfaces for enterprise clients (e.g. Dawlance) —
+          analytics-driven UI, reusable component systems, and a heavy focus on
+          render performance.
+        </p>
+        <div class="chips"><span class="chip">React</span><span class="chip">data viz</span><span class="chip">design system</span><span class="chip">performance</span></div>
+      </article>
+
+      <article class="card reveal">
+        <div class="preview" data-mono="APP">
+          <div class="pv-bar"><i></i><i></i><i></i><span class="pv-url">react-native · 3 roles</span></div>
+          <div class="pv-body pv-center">
+            <div class="pv-phones">
+              <span class="pv-phone"></span>
+              <span class="pv-phone pv-phone-mid"></span>
+              <span class="pv-phone"></span>
+            </div>
+          </div>
+        </div>
+        <div class="proj-index">mobile · 3 roles</div>
+        <h3 class="proj-title" style="font-size:24px;">Food Delivery App</h3>
+        <div class="proj-role">Vendor · Customer · Rider</div>
+        <p class="proj-desc">
+          A multi-role delivery app built in React Native — REST integration,
+          push notifications, Google Maps, and QR features across three distinct
+          user experiences.
+        </p>
+        <div class="chips"><span class="chip">React Native</span><span class="chip">Google Maps</span><span class="chip">push</span><span class="chip">QR</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- LABS -->
+  <section class="section pad" id="labs">
+    <div class="rowhead">
+      <span class="tag"><span class="ac">//</span> 02 — labs</span>
+      <h2 class="h-sec">Things I build for fun</h2>
+      <span class="faint" style="font-size:13px;margin-left:auto;">self-initiated · nights &amp; weekends</span>
+    </div>
+    <div class="labs-grid">
+      <article class="lab lab-shot reveal">
+        <figure class="shot shot-sm">
+          <div class="pv-bar"><i></i><i></i><i></i><span class="pv-url">abdulsubhan1.github.io/difftext</span></div>
+          <img src="portfolio/img/difftext.png" alt="DiffText — text comparison tool" loading="lazy">
+        </figure>
+        <div class="lab-top"><span class="kind">// web tool · chrome extension</span><span class="lab-arrow">↗</span></div>
+        <h3>DiffText</h3>
+        <p>A fast, private text-comparison tool. Paste two versions and instantly see what changed — by word, line, or character. Runs 100% in the browser, works offline, zero dependencies. Ships as a web app and a Chrome extension.</p>
+        <div class="chips" style="margin-bottom:16px;"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">zero-deps</span><span class="chip">mobile-first</span></div>
+        <a class="go" href="https://abdulsubhan1.github.io/difftext" target="_blank" rel="noopener">abdulsubhan1.github.io/difftext ↗</a>
+      </article>
+      <article class="lab lab-shot reveal">
+        <figure class="shot shot-sm">
+          <div class="pv-bar"><i></i><i></i><i></i><span class="pv-url">abdulsubhan1.github.io/notetab</span></div>
+          <img src="portfolio/img/notetab.png" alt="NoteTab — online notepad" loading="lazy">
+        </figure>
+        <div class="lab-top"><span class="kind">// web tool · chrome extension</span><span class="lab-arrow">↗</span></div>
+        <h3>NoteTab</h3>
+        <p>A fast, zero-backend notepad that runs entirely in the browser. Open it and start typing — notes auto-save to localStorage, work offline, and never leave your device. A lightweight alternative to Keep or Notion for quick notes.</p>
+        <div class="chips" style="margin-bottom:16px;"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">localStorage</span><span class="chip">offline-first</span></div>
+        <a class="go" href="https://abdulsubhan1.github.io/notetab" target="_blank" rel="noopener">abdulsubhan1.github.io/notetab ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="section pad" id="stack">
+    <div class="rowhead">
+      <span class="tag"><span class="ac">//</span> 03 — stack</span>
+      <h2 class="h-sec">Tools of the trade</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-row"><span class="label">core</span><div class="items"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span></div></div>
+      <div class="stack-row"><span class="label">state</span><div class="items"><span class="chip">Redux Toolkit</span><span class="chip">Zustand</span></div></div>
+      <div class="stack-row"><span class="label">styling</span><div class="items"><span class="chip">Tailwind CSS</span><span class="chip">MUI</span><span class="chip">Chakra UI</span></div></div>
+      <div class="stack-row"><span class="label">mobile</span><div class="items"><span class="chip">React Native</span></div></div>
+      <div class="stack-row"><span class="label">platform</span><div class="items"><span class="chip">REST APIs</span><span class="chip">ISR</span><span class="chip">Revalidation</span><span class="chip">Micro Frontends</span><span class="chip">Node.js</span></div></div>
+      <div class="stack-row"><span class="label">ops</span><div class="items"><span class="chip">Azure DevOps</span><span class="chip">GitHub</span></div></div>
+    </div>
+  </section>
+
+  <!-- ABOUT + EXPERIENCE + EDUCATION -->
+  <section class="section pad" id="about">
+    <div class="rowhead">
+      <span class="tag"><span class="ac">//</span> 04 — about</span>
+      <h2 class="h-sec">A bit more on me</h2>
+    </div>
+    <div class="about-grid" style="margin-bottom:clamp(40px,6vw,72px);">
+      <figure class="portrait"><img src="portfolio/img/abdul-portrait.jpg" alt="Abdul Subhan" loading="lazy"></figure>
+      <div class="about-body">
+        <p>
+          I've spent the last <span class="ac">5 years</span> building frontends across
+          insurance, food delivery, and enterprise ERP — from greenfield MVPs to
+          migrating a live platform from <span class="ac">Next.js 12 to 15</span>
+          without downtime.
+        </p>
+        <p>
+          What I care about most: <span class="ac">performance</span> (payload size,
+          time-to-first-byte, runtime), <span class="ac">SEO at scale</span>, and
+          frontends that stay maintainable as teams and codebases grow — reusable
+          components, sensible state, and clean infrastructure-level routing.
+        </p>
+        <p>
+          I hold an MS and BS in Computer Science from NED University, and I'm open
+          to remote roles and opportunities across the GCC.
+        </p>
+      </div>
+    </div>
+
+    <span class="tag" style="display:block;margin-bottom:18px;"><span class="ac">//</span> experience</span>
+    <div class="timeline">
+      <div class="job">
+        <div class="when">Mar 2024 — Present</div>
+        <div class="what">
+          <h4>Frontend Engineer</h4>
+          <div class="co">InsuranceMarket.ae — Remote (Dubai)</div>
+          <p>Building and maintaining a dual-application insurance platform — 270+ page content site plus transactional e-commerce — with Next.js rewrites, headless CMS, i18n, and AI OCR onboarding.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Feb 2023 — Mar 2024</div>
+        <div class="what">
+          <h4>Frontend Engineer</h4>
+          <div class="co">Finosys — Onsite</div>
+          <p>Built a multi-role food delivery mobile app (vendor, customer, rider) and delivered MVPs for startups and university-affiliated projects.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Jul 2022 — Jan 2023</div>
+        <div class="what">
+          <h4>React Native Developer</h4>
+          <div class="co">Chaynz Tech</div>
+          <p>Contributed to production frontend modules; built UI components with React, Redux, and Tailwind, and supported API integrations.</p>
+        </div>
+      </div>
+      <div class="job">
+        <div class="when">Jun 2021 — Nov 2021</div>
+        <div class="what">
+          <h4>Frontend Intern / Junior Developer</h4>
+          <div class="co">Linkit Soft</div>
+          <p>First professional role — building UI components and supporting feature delivery.</p>
+        </div>
+      </div>
+    </div>
+
+    <span class="tag" style="display:block;margin:clamp(40px,6vw,64px) 0 18px;"><span class="ac">//</span> education</span>
+    <div class="edu">
+      <div class="e"><div class="deg">MS — Computer Science</div><div class="meta">NED University · 2023 — 2025</div></div>
+      <div class="e"><div class="deg">BS — Computer Science</div><div class="meta">NED University · 2018 — 2022</div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section pad contact" id="contact">
+    <div class="rowhead">
+      <span class="tag"><span class="ac">//</span> 05 — contact</span>
+    </div>
+    <h2 class="big">Let's build something fast.</h2>
+    <div class="contact-rows">
+      <a class="crow" href="mailto:abdul.subhan.durrani@gmail.com"><span class="k">// email</span><span class="v">abdul.subhan.durrani@gmail.com</span><span class="arrow">↗</span></a>
+      <a class="crow" href="https://www.linkedin.com/in/abdul-subhan-059281188/" target="_blank" rel="noopener"><span class="k">// linkedin</span><span class="v">/in/abdul-subhan-059281188</span><span class="arrow">↗</span></a>
+      <a class="crow" href="tel:+923472708421"><span class="k">// phone</span><span class="v">+92 347 2708421</span><span class="arrow">↗</span></a>
+      <a class="crow" href="uploads/AbdulSubhan-frontend-engineer.pdf" target="_blank" rel="noopener"><span class="k">// résumé</span><span class="v">download PDF</span><span class="arrow">↓</span></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="foot pad">
+    <span>© 2026 Abdul Subhan</span>
+    <span>built with too much <span class="ac">monospace</span> · karachi, pk</span>
+  </footer>
+
+</main>
+
+<script>
+  const root = document.documentElement;
+  const stored = localStorage.getItem('as-theme');
+  if (stored) root.setAttribute('data-theme', stored);
+
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('as-theme', next);
+  });
+
+  const nav = document.getElementById('nav');
+  document.getElementById('menuToggle').addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const revealAll = () => reveals.forEach(el => el.classList.add('in'));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+    setTimeout(revealAll, 1600);
+  } else {
+    revealAll();
+  }
+</script>
+
+</body>
+</html>
