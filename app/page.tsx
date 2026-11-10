@@ -125,7 +125,7 @@ export default function Home() {
         <Section id="projects" title="Projects">
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((p) => (
-              <article key={p.title} className="rounded-2xl border border-dashed border-white/15 p-6">
+              <article key={p.title} className="rounded-2xl border border-white/15 p-6 md:col-span-2">
                 <h3 className="text-lg font-semibold text-white">{p.title}</h3>
                 <p className="mt-3 text-slate-400">{p.description}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -133,11 +133,14 @@ export default function Home() {
                     <Tag key={s}>{s}</Tag>
                   ))}
                 </div>
-                {p.href && (
-                  <a href={p.href} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-sky-400 hover:underline">
-                    View project ↗
+                <div className="mt-5 flex flex-wrap gap-3">
+                  <a href={p.live} target="_blank" rel="noreferrer" className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-sky-400">
+                    Live demo ↗
                   </a>
-                )}
+                  <a href={p.code} target="_blank" rel="noreferrer" className={outlineBtn}>
+                    Source code ↗
+                  </a>
+                </div>
               </article>
             ))}
           </div>

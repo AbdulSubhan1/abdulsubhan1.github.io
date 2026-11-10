@@ -98,11 +98,12 @@ export const caseStudies: CaseStudy[] = [
 
 export const projects = [
   {
-    title: "PolicyDesk (in progress)",
+    title: "PolicyDesk",
     description:
-      "An open-source insurance CRM with dynamic role-based access control and an MCP server, so an AI assistant can work inside the CRM while respecting each user's permissions.",
-    stack: ["Next.js", "NestJS", "PostgreSQL", "RBAC", "MCP"],
-    href: "",
+      "An insurance brokerage CRM: inquiries become leads, advisors quote from insurer plans, compliance runs KYC/AML, finance records payments and policies come back as renewals. Database-driven RBAC with department and own-record scopes, English and Arabic (RTL), its own 54-component UI library and Playwright tests. Sign in as any of seven roles with one click.",
+    stack: ["Next.js 15", "TypeScript", "PostgreSQL", "Drizzle", "RBAC", "i18n (RTL)", "Playwright"],
+    live: "https://policydesk-opal.vercel.app/login",
+    code: "https://github.com/AbdulSubhan1/policydesk",
   },
 ];
 
