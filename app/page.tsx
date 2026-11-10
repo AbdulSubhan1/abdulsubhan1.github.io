@@ -63,6 +63,12 @@ export default function Home() {
             <a href="#work" className="rounded-lg bg-white px-4 py-2 text-sm font-medium text-slate-950 hover:bg-slate-200">
               See my work
             </a>
+            <a href={profile.cv} target="_blank" rel="noreferrer" className={outlineBtn}>
+              View CV
+            </a>
+            <a href={profile.cv} download className={outlineBtn}>
+              Download CV
+            </a>
             <a href={profile.linkedin} target="_blank" rel="noreferrer" className={outlineBtn}>
               LinkedIn
             </a>
