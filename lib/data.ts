@@ -1,11 +1,11 @@
 export const profile = {
   name: "Abdul Subhan",
-  role: "Full-Stack Engineer",
-  tagline: "Next.js · NestJS · TypeScript · AI Agents & MCP Tooling",
+  role: "Frontend and full-stack engineer",
+  headline: "I build the screens insurance customers buy through, and the CRMs their teams run on.",
   intro:
-    "I build insurtech platforms end to end, from purchase journeys and CRMs to the AI developer tools that help teams ship faster.",
+    "Three years shipping Next.js products for the UAE and Bahrain, in English and Arabic. Lately also the AI tooling that lets a team change production safely.",
   location: "Karachi, Pakistan",
-  availability: "Open to remote, GCC relocation, or Karachi hybrid. Available immediately.",
+  availability: "Available now: remote, GCC relocation or Karachi hybrid",
   email: "abdul.subhan.durrani@gmail.com",
   whatsapp: "https://wa.me/923472708421",
   linkedin: "https://linkedin.com/in/abdul-subhan-059281188",
@@ -19,7 +19,10 @@ export const about = [
   "I hold a BS and MS in Computer Science from NED University of Engineering & Technology.",
 ];
 
+export type CaseIcon = "bot" | "shield" | "building" | "cart" | "gauge";
+
 export type CaseStudy = {
+  icon: CaseIcon;
   title: string;
   context: string;
   problem: string;
@@ -30,21 +33,23 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
+    icon: "bot",
     title: "AI developer tooling: MCP servers & agent plugins",
-    context: "InsuranceMarket.ae · Internal tooling",
+    context: "InsuranceMarket.ae, internal tooling",
     problem:
       "Small SEO and content changes (page metadata, schema, navigation links, llms.txt) needed a developer ticket every time, which slowed down QA and content teams.",
     built: [
       "MCP (Model Context Protocol) server and Claude Code plugin that turn a plain-language request into a code change",
       "Every change automatically creates a branch, builds a preview deployment and opens a pull request for review",
-      "Foreman: an AI dev-agent plugin that goes from requirements doc → plan → full-stack code → PR",
+      "Foreman: an AI dev-agent plugin that goes from a requirements doc to a plan, full-stack code and a pull request",
       "A page-generation agent that turns structured content JSON into published pages",
     ],
     stack: ["MCP", "Claude Code", "TypeScript", "Vercel", "GitHub API"],
   },
   {
+    icon: "shield",
     title: "Bahrain website & CRM with RBAC",
-    context: "InsuranceMarket.ae · Bahrain market",
+    context: "InsuranceMarket.ae, Bahrain",
     problem:
       "The Bahrain business needed its own customer website and an internal CRM where every team member sees only what their role allows.",
     built: [
@@ -55,8 +60,9 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Next.js", "NestJS", "TypeScript", "RBAC", "REST APIs"],
   },
   {
+    icon: "building",
     title: "Business (SME) insurance platform",
-    context: "InsuranceMarket.ae · UAE",
+    context: "InsuranceMarket.ae, UAE",
     problem:
       "Businesses needed to compare and apply for many different covers, each with its own long application form, and new covers kept being added.",
     built: [
@@ -69,8 +75,9 @@ export const caseStudies: CaseStudy[] = [
     link: { label: "insurancemarket.ae", href: "https://insurancemarket.ae" },
   },
   {
+    icon: "cart",
     title: "Insurance purchase journeys for 8 lines of business",
-    context: "InsuranceMarket.ae · UAE",
+    context: "InsuranceMarket.ae, UAE",
     problem:
       "Customers needed to get quotes, compare plans and buy policies online across many insurance products, each with insurer integrations and compliance checks.",
     built: [
@@ -83,14 +90,15 @@ export const caseStudies: CaseStudy[] = [
     link: { label: "insurancemarket.ae", href: "https://insurancemarket.ae" },
   },
   {
+    icon: "gauge",
     title: "SEO & performance platform",
-    context: "InsuranceMarket.ae · Content + transactional apps",
+    context: "InsuranceMarket.ae, content and transactional apps",
     problem:
       "Marketing needed fast, indexable landing pages for every product, connected seamlessly to the transactional app.",
     built: [
       "270+ page content site on headless WordPress with ISR and on-demand revalidation",
       "Next.js rewrites to join the content site and the app under one domain, plus an automated sitemap",
-      "Migrated Next.js 12 → 15, added next-intl (English/Arabic, RTL) and improved Core Web Vitals",
+      "Migrated Next.js 12 to 15, added next-intl (English and Arabic, RTL) and improved Core Web Vitals",
     ],
     stack: ["Next.js", "Headless WordPress", "ISR", "next-intl", "Core Web Vitals"],
   },
@@ -116,7 +124,7 @@ export const projects = [
 
 export const experience = [
   {
-    role: "Full-Stack Engineer",
+    role: "Frontend and full-stack engineer",
     company: "InsuranceMarket.ae (Alfred Holdings)",
     period: "Mar 2024 – Nov 2026",
     summary: "Insurtech across UAE & Bahrain: purchase journeys, business insurance, CRM with RBAC, AI tooling.",

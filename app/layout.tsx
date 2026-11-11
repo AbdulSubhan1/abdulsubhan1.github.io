@@ -1,35 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { IBM_Plex_Sans_Arabic, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const schibsted = Schibsted_Grotesk({ variable: "--font-schibsted", subsets: ["latin"] });
+const plexArabic = IBM_Plex_Sans_Arabic({
+  variable: "--font-plex-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "Abdul Subhan | Full-Stack Engineer",
+  title: "Abdul Subhan | Frontend and full-stack engineer",
   description:
-    "Full-stack engineer building insurtech platforms, CRMs with RBAC, and AI developer tooling (MCP servers, agent plugins) with Next.js and NestJS.",
+    "Frontend and full-stack engineer shipping bilingual (English and Arabic) Next.js products for insurtech in the UAE and Bahrain: purchase journeys, CRMs with role-based access, and AI developer tooling.",
+  openGraph: {
+    title: "Abdul Subhan | Frontend and full-stack engineer",
+    description: "Bilingual Next.js products for the UAE and Bahrain: purchase journeys, CRMs and AI tooling.",
+    url: "https://abdulsubhan1.github.io",
+    images: ["/policydesk-dashboard.webp"],
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${schibsted.variable} ${plexArabic.variable} font-sans antialiased`}>{children}</body>
     </html>
   );
 }

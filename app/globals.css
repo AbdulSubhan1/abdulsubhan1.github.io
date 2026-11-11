@@ -1,15 +1,64 @@
 @import "tailwindcss";
 
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* One palette for the whole site. The teal is PolicyDesk's, so the portfolio and the product read as one brand. */
+@theme {
+  --color-paper: #f3f5f2;
+  --color-surface: #ffffff;
+  --color-ink: #10201b;
+  --color-ink-soft: #3c4b46;
+  --color-muted: #66766f;
+  --color-line: #dce3df;
+  --color-brand: #0e7c66;
+  --color-brand-strong: #0a5e4d;
+  --color-brand-soft: #e2f1ec;
+  --color-night: #0d1a16;
+
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-plex-arabic), var(--font-schibsted), sans-serif;
+
+  --animate-enter-start: enter-start 420ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  --animate-enter-end: enter-end 420ms cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  @keyframes enter-start {
+    from {
+      opacity: 0;
+      transform: translateX(-24px);
+    }
+  }
+  @keyframes enter-end {
+    from {
+      opacity: 0;
+      transform: translateX(24px);
+    }
+  }
 }
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: #020617;
-  color: #e2e8f0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+[dir="rtl"] {
+  font-family: var(--font-arabic);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
