@@ -13,10 +13,25 @@ export const profile = {
   cv: "/Abdul-Subhan-CV.pdf",
 };
 
-export const about = [
-  "I'm a full-stack engineer with 3+ years of experience shipping production products in insurtech and enterprise software. Most recently at InsuranceMarket.ae, I worked across the UAE and Bahrain markets: customer purchase journeys, a business insurance platform, and an internal CRM with role-based access control.",
-  "I care about owning a feature from start to finish: clarifying requirements, agreeing API contracts with backend teams, building the UI and services, and seeing it through deploys and production issues. Lately I've focused on AI tooling: MCP servers and agent plugins that let non-engineers make safe production changes.",
-  "I hold a BS and MS in Computer Science from NED University of Engineering & Technology.",
+/** The story on the home page; highlighted parts light up in the brand colour as you scroll. */
+export const story: { text: string; highlight?: boolean }[] = [
+  { text: "I started in 2021 building UI modules as an intern. Since then I've built" },
+  { text: "a food delivery app", highlight: true },
+  { text: "for customers, vendors and riders," },
+  { text: "ERP dashboards", highlight: true },
+  { text: "for enterprise teams, and at InsuranceMarket.ae" },
+  { text: "the journeys people buy insurance through,", highlight: true },
+  { text: "in English and Arabic. I own a feature from the first conversation to production, and lately I also build" },
+  { text: "the AI tools", highlight: true },
+  { text: "that help a team ship it." },
+];
+
+/** Real numbers from shipped work, each with what it counts. */
+export const stats: { value: string; label: string }[] = [
+  { value: "8", label: "insurance products customers buy online through flows I built" },
+  { value: "270+", label: "pages on a content site built for search and speed" },
+  { value: "30+", label: "insurance covers served by one config-driven form system" },
+  { value: "2021", label: "the year I shipped my first production UI" },
 ];
 
 export const experience: { role: string; company: string; period: string; summary: string; projects?: string[] }[] = [

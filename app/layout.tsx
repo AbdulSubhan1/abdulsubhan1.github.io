@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic, Schibsted_Grotesk } from "next/font/google";
+import "lenis/dist/lenis.css";
+import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
 
 const schibsted = Schibsted_Grotesk({ variable: "--font-schibsted", subsets: ["latin"] });
@@ -24,7 +26,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${schibsted.variable} ${plexArabic.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${schibsted.variable} ${plexArabic.variable} font-sans antialiased`}>
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }

@@ -15,10 +15,11 @@ import Link from "next/link";
 import { BrandIcon } from "@/components/brand-icon";
 import { CopyEmail } from "@/components/copy-email";
 import { ProjectCard } from "@/components/project-card";
+import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteHeader } from "@/components/site-header";
 import { GitHubIcon, LinkedInIcon } from "@/components/social-icons";
 import { STACK, Tech } from "@/components/tech";
-import { about, experience, profile, skills } from "@/lib/data";
+import { experience, profile, skills, stats, story } from "@/lib/data";
 import { PROJECTS, projectBySlug } from "@/lib/projects";
 
 // The range of work, each pointing at a project that shows it
@@ -141,16 +142,33 @@ export default function Home() {
           </div>
         </section>
 
-        {/* About */}
+        {/* Story */}
         <section aria-labelledby="about" className="border-y border-line bg-surface">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-16 md:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
-            <h2 id="about" className="text-3xl font-semibold tracking-tight">
-              How I work
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-20 md:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:py-28">
+            <h2 id="about" className="text-3xl font-semibold tracking-tight lg:sticky lg:top-28 lg:self-start">
+              How I got here
             </h2>
-            <div className="grid max-w-[68ch] gap-4 text-lg leading-relaxed text-ink-soft">
-              {about.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
+            <div className="min-w-0">
+              <ScrollReveal
+                parts={story}
+                className="text-2xl leading-snug font-medium tracking-[-0.01em] text-balance md:text-[2rem] md:leading-[1.3]"
+              />
+              <dl className="mt-14 grid grid-cols-2 border-t border-line lg:grid-cols-4">
+                {stats.map((stat) => (
+                  <div key={stat.value} className="min-w-0 border-b border-line py-6 pe-4 lg:border-b-0">
+                    <dt className="sr-only">{stat.label}</dt>
+                    <dd>
+                      <span className="block text-4xl font-semibold tracking-tight tabular-nums md:text-5xl">
+                        {stat.value}
+                      </span>
+                      <span aria-hidden className="mt-2 block text-sm leading-snug text-muted">
+                        {stat.label}
+                      </span>
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-6 text-sm text-muted">BS and MS in Computer Science, NED University of Engineering &amp; Technology</p>
             </div>
           </div>
         </section>
