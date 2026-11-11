@@ -105,6 +105,13 @@ export const projects = [
     live: "https://policydesk-opal.vercel.app/login",
     code: "https://github.com/AbdulSubhan1/policydesk",
   },
+  {
+    title: "CRM Kit",
+    description:
+      "A Claude Code plugin that turns PolicyDesk's foundations into a repeatable process: name an industry and it researches the business and its UI needs, writes the knowledge base, checks the coding standard, builds the CRM module by module and tests it, stopping for approval at every step. It ships a business-free starter app, a copyable module pattern, and scripts that keep the kit improving from every CRM built with it.",
+    stack: ["Claude Code plugin", "Agent skills", "Next.js 15", "Node.js", "Playwright"],
+    code: "https://github.com/AbdulSubhan1/crm-kit",
+  },
 ];
 
 export const experience = [

@@ -134,9 +134,11 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <a href={p.live} target="_blank" rel="noreferrer" className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-sky-400">
-                    Live demo ↗
-                  </a>
+                  {"live" in p && p.live && (
+                    <a href={p.live} target="_blank" rel="noreferrer" className="rounded-lg bg-sky-500 px-4 py-2 text-sm font-medium text-slate-950 hover:bg-sky-400">
+                      Live demo ↗
+                    </a>
+                  )}
                   <a href={p.code} target="_blank" rel="noreferrer" className={outlineBtn}>
                     Source code ↗
                   </a>
