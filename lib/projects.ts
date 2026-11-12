@@ -146,6 +146,12 @@ export const PROJECTS: Project[] = [
       live: "https://paysandbox.vercel.app",
       code: "https://github.com/AbdulSubhan1/paysandbox",
     },
+    video: {
+      src: "/projects/paysandbox/demo.mp4",
+      poster: "/projects/paysandbox/demo-poster.webp",
+      title: "PaySandbox walkthrough: the dashboard, a partial refund, a dispute won, webhooks and the API log",
+      duration: "2:00",
+    },
     cover: {
       src: "/projects/paysandbox/checkout.webp",
       alt: "PaySandbox hosted checkout: the order on the left, the card form and clickable test cards on the right, under a test mode banner",
@@ -155,13 +161,13 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         src: "/projects/paysandbox/dashboard.webp",
-        alt: "Merchant dashboard: volume, failed and disputed totals, payments by status, recent payments and webhooks",
+        alt: "Merchant dashboard: net volume, successful payments, refunds and disputes, volume per day, what needs attention and the latest payments",
         width: 2880,
         height: 1800,
       },
       {
         src: "/projects/paysandbox/payments.webp",
-        alt: "Payments list with status filters, the card used and the payment ID",
+        alt: "Payments list: status filters with counts, search, what was bought, the customer, the card and the amount",
         width: 2880,
         height: 1800,
       },
@@ -201,8 +207,8 @@ export const PROJECTS: Project[] = [
     video: {
       src: "/projects/brokwise/demo.mp4",
       poster: "/projects/brokwise/demo-poster.webp",
-      title: "Brokwise walkthrough: the forms, prices from your answers, and review and pay",
-      duration: "2:14",
+      title: "Brokwise walkthrough: the forms, prices from your answers, and agreeing to the terms before paying",
+      duration: "2:34",
     },
     cover: {
       src: "/projects/brokwise/home.webp",
