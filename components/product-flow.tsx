@@ -94,6 +94,8 @@ export function ProductFlow({ current, shots }: { current?: string; shots?: bool
 
       <a
         href="https://brokwise.vercel.app/car"
+        data-pulse-event="live_journey_opened"
+        data-pulse-label="brokwise car"
         target="_blank"
         rel="noreferrer"
         className="mt-8 inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-brand-strong"

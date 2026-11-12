@@ -86,7 +86,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <main id="main">
         <article>
           <header className="mx-auto max-w-6xl px-4 pt-10 pb-12 md:px-6 lg:pt-14">
-            <Link href="/#projects" className="inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink">
+            <Link
+              href="/#projects"
+              data-pulse-event="nav_clicked"
+              data-pulse-label="Back to projects"
+              className="inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink">
               <ArrowLeft size={16} aria-hidden />
               All projects
             </Link>
@@ -135,6 +139,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 {links.live && (
                   <a
                     href={links.live}
+                    data-pulse-event="live_demo_opened"
+                    data-pulse-label={project.slug}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-paper hover:bg-brand-strong"
@@ -146,6 +152,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 {links.code && (
                   <a
                     href={links.code}
+                    data-pulse-event="source_code_opened"
+                    data-pulse-label={project.slug}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-4 py-2.5 text-sm font-medium hover:border-ink/30"
@@ -157,6 +165,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 {links.site && (
                   <a
                     href={links.site}
+                    data-pulse-event="site_opened"
+                    data-pulse-label={project.slug}
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-4 py-2.5 text-sm font-medium hover:border-ink/30"
@@ -268,6 +278,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 px-4 py-12 md:grid-cols-2 md:px-6">
             <Link
               href={`/projects/${next.slug}`}
+              data-pulse-event="next_project_opened"
+              data-pulse-label={next.slug}
               className="group flex min-w-0 items-center gap-4 rounded-2xl border border-line p-5 transition-colors hover:border-ink/25"
             >
               <ProjectIcon name={next.icon} />
@@ -280,6 +292,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <a
               href={profile.whatsapp}
               data-pulse-event="whatsapp_clicked"
+              data-pulse-label={`project page: ${project.slug}`}
               target="_blank"
               rel="noreferrer"
               className="group flex min-w-0 items-center gap-4 rounded-2xl bg-night p-5 text-white transition-colors hover:bg-ink"

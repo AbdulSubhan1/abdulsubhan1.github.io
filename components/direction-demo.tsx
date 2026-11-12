@@ -56,6 +56,8 @@ export function DirectionDemo() {
             role="radio"
             aria-checked={lang === l}
             onClick={() => setLang(l)}
+            data-pulse-event="language_demo_switched"
+            data-pulse-label={l === "en" ? "English" : "Arabic"}
             className="rounded-full px-4 py-1.5 font-medium text-ink-soft transition-colors hover:text-ink aria-checked:bg-ink aria-checked:text-paper"
           >
             {l === "en" ? "English" : <span className="font-arabic">العربية</span>}
