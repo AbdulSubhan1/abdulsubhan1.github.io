@@ -230,7 +230,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               className="group flex min-w-0 items-center gap-4 rounded-2xl bg-night p-5 text-white transition-colors hover:bg-ink"
             >
               <span className="min-w-0 flex-1">
-                <span className="block text-sm text-white/60">Want something like this?</span>
+                <span className="block text-sm text-white/60">Hiring for work like this?</span>
                 <span className="block font-semibold">Message me on WhatsApp</span>
               </span>
               <ArrowUpRight size={20} aria-hidden className="shrink-0 text-white/60" />

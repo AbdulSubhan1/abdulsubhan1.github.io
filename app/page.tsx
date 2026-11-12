@@ -1,37 +1,25 @@
-import {
-  ArrowRight,
-  Bot,
-  FileText,
-  LayoutDashboard,
-  MapPin,
-  MessageCircle,
-  Plug,
-  Search,
-  Smartphone,
-  SquareMousePointer,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, ArrowUpRight, Download, FileText, MapPin, MessageCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand-icon";
 import { CopyEmail } from "@/components/copy-email";
 import { ProductFlow } from "@/components/product-flow";
-import { ProjectCard } from "@/components/project-card";
-import { ScrollReveal } from "@/components/scroll-reveal";
+import { ProjectIcon } from "@/components/project-icon";
+import { ProjectLinks } from "@/components/project-links";
 import { SiteHeader } from "@/components/site-header";
 import { GitHubIcon, LinkedInIcon } from "@/components/social-icons";
 import { STACK, Tech } from "@/components/tech";
-import { experience, profile, skills, stats, story } from "@/lib/data";
+import { experience, profile, skills, workHighlights } from "@/lib/data";
 import { PROJECTS, projectBySlug } from "@/lib/projects";
 
-// The range of work, each pointing at a project that shows it
-const RANGE: { icon: LucideIcon; title: string; example: string; slug: string }[] = [
-  { icon: SquareMousePointer, title: "Web apps", example: "Insurance purchase journeys", slug: "insurance-purchase-journeys" },
-  { icon: LayoutDashboard, title: "Dashboards", example: "ERP for enterprise clients", slug: "erp-dashboards" },
-  { icon: Smartphone, title: "Mobile apps", example: "Three-role food delivery app", slug: "food-delivery-app" },
-  { icon: Search, title: "Content at scale", example: "130+ pages through an AI pipeline", slug: "page-generation" },
-  { icon: Plug, title: "APIs and payments", example: "A payment gateway with webhooks", slug: "paysandbox" },
-  { icon: Bot, title: "AI products", example: "CV matching with private AI", slug: "jobfit" },
-];
+// The journey section shows the three connected apps; these two live projects sit under it
+const ALSO_LIVE = ["jobfit", "crm-kit"];
+// Everything not shown in the first sections goes in "More work", in the order of PROJECTS
+const SHOWN = new Set([
+  ...PROJECTS.filter((p) => p.connected).map((p) => p.slug),
+  ...ALSO_LIVE,
+  ...workHighlights.map((h) => h.slug),
+]);
 
 const primaryButton =
   "inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-brand-strong";
@@ -41,18 +29,20 @@ const darkButton =
   "inline-flex items-center gap-2 rounded-lg border border-white/20 px-4 py-2.5 text-sm font-medium transition-colors hover:border-white/50";
 const lightButton =
   "inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-brand-soft";
+const inlineLink = "font-medium text-brand-strong underline-offset-4 hover:underline";
 
 export default function Home() {
-  const [featured, ...rest] = PROJECTS;
+  const alsoLive = ALSO_LIVE.map((slug) => projectBySlug(slug)!);
+  const moreWork = PROJECTS.filter((p) => !SHOWN.has(p.slug));
 
   return (
     <>
       <SiteHeader />
       <main id="main">
-        {/* Hero */}
+        {/* Hero: who he is, what he's best at, and the live journey as the first thing to look at */}
         <section
           id="top"
-          className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 pt-14 pb-20 md:px-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:pt-24 lg:pb-28"
+          className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-4 pt-14 pb-20 md:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:pt-24 lg:pb-28"
         >
           <div className="min-w-0">
             <p className="flex items-center gap-2 text-sm text-ink-soft">
@@ -66,12 +56,16 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <a href="#projects" className={primaryButton}>
-                See my projects
+                See the live journey
                 <ArrowRight size={16} aria-hidden />
+              </a>
+              <a href={profile.cv} download className={quietButton}>
+                <Download size={16} aria-hidden />
+                Download CV
               </a>
               <a href={profile.whatsapp} target="_blank" rel="noreferrer" className={quietButton}>
                 <MessageCircle size={16} aria-hidden />
-                Message on WhatsApp
+                WhatsApp
               </a>
             </div>
 
@@ -93,98 +87,131 @@ export default function Home() {
             </ul>
           </div>
 
-          <nav aria-labelledby="range" className="min-w-0 rounded-2xl border border-line bg-surface p-2 shadow-[0_24px_48px_-28px_rgb(16_32_27/0.25)]">
-            <h2 id="range" className="px-4 pt-3 pb-2 text-sm font-medium text-muted">
-              What I build
+          {/* The website and the checkout of the journey below; on phones the journey section shows them instead */}
+          <figure className="relative hidden min-w-0 pb-16 ps-10 lg:block">
+            <Image
+              src="/projects/brokwise/car.webp"
+              alt="Brokwise, my demo insurance website, asking for car insurance details"
+              width={2880}
+              height={1800}
+              priority
+              sizes="40vw"
+              className="w-full rounded-xl border border-line shadow-[0_24px_48px_-28px_rgb(16_32_27/0.35)]"
+            />
+            <Image
+              src="/projects/paysandbox/checkout.webp"
+              alt="PaySandbox, my payment gateway, taking the payment on its hosted checkout"
+              width={2880}
+              height={1800}
+              sizes="25vw"
+              className="absolute bottom-0 start-0 w-1/2 rounded-xl border border-line shadow-[0_24px_48px_-20px_rgb(16_32_27/0.45)]"
+            />
+            <figcaption className="absolute end-0 bottom-2 w-[45%] text-sm leading-snug text-muted">
+              Three live apps I built: Brokwise → PolicyDesk → PaySandbox
+            </figcaption>
+          </figure>
+        </section>
+
+        {/* The strongest proof first: one journey across three live apps */}
+        <section aria-labelledby="projects" className="border-t border-line bg-surface/60">
+          <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
+            <div className="mb-10 max-w-3xl">
+              <p className="text-sm font-medium text-brand-strong">Live, try it</p>
+              <h2 id="projects" className="mt-2 text-3xl font-semibold tracking-tight text-balance md:text-4xl">
+                Buy car insurance end to end, across three apps I built
+              </h2>
+              <p className="mt-3 text-lg text-ink-soft">
+                A website, a CRM and a payment gateway. Each is its own app with its own code, connected by signed APIs and
+                webhooks. Ask for a quote, pick a plan and pay with a test card.
+              </p>
+            </div>
+            <ProductFlow shots />
+
+            <h3 className="mt-16 text-sm font-medium text-muted">Also live</h3>
+            <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+              {alsoLive.map((project) => (
+                <li key={project.slug} className="flex min-w-0 gap-4 rounded-2xl border border-line bg-surface p-5">
+                  <ProjectIcon name={project.icon} />
+                  <div className="min-w-0">
+                    <p className="font-semibold">
+                      {project.title} <span className="font-normal text-muted">· {project.category}</span>
+                    </p>
+                    <p className="mt-1 text-ink-soft">{project.summary}</p>
+                    <div className="mt-3">
+                      <ProjectLinks project={project} />
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* The company work, one number each */}
+        <section aria-labelledby="work" className="mx-auto max-w-6xl px-4 py-20 md:px-6">
+          <div className="mb-10 max-w-3xl">
+            <p className="text-sm font-medium text-brand-strong">2024 – 2026</p>
+            <h2 id="work" className="mt-2 text-3xl font-semibold tracking-tight md:text-4xl">
+              At InsuranceMarket.ae
             </h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2">
-              {RANGE.map((item) => (
-                <li key={item.title} className="min-w-0">
+            <p className="mt-3 text-lg text-ink-soft">
+              Insurtech for the UAE and Bahrain, in English and Arabic. This is company work, so there is no public demo; the
+              customer side is live on{" "}
+              <a href="https://insurancemarket.ae" target="_blank" rel="noreferrer" className={inlineLink}>
+                insurancemarket.ae
+              </a>
+              , and each case study shows what I built and how.
+            </p>
+          </div>
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {workHighlights.map((item) => (
+              <li key={item.slug} className="min-w-0">
+                <Link
+                  href={`/projects/${item.slug}`}
+                  className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-5 transition-[border-color,box-shadow] hover:border-ink/25 hover:shadow-[0_20px_40px_-24px_rgb(16_32_27/0.3)]"
+                >
+                  <span className="text-4xl font-semibold tracking-tight tabular-nums">{item.value}</span>
+                  <span className="mt-2 text-sm leading-snug text-ink-soft">{item.label}</span>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-medium text-brand-strong">
+                    {projectBySlug(item.slug)?.title}
+                    <ArrowRight size={14} aria-hidden className="transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* The rest, one line each */}
+        <section aria-labelledby="more" className="border-y border-line bg-surface">
+          <div className="mx-auto max-w-6xl px-4 py-16 md:px-6">
+            <h2 id="more" className="text-2xl font-semibold tracking-tight">
+              More work
+            </h2>
+            <ul className="mt-6 divide-y divide-line border-y border-line">
+              {moreWork.map((project) => (
+                <li key={project.slug}>
                   <Link
-                    href={`/projects/${item.slug}`}
-                    className="group flex h-full items-start gap-3 rounded-xl p-4 transition-colors hover:bg-paper"
+                    href={`/projects/${project.slug}`}
+                    className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-4"
                   >
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-soft text-brand-strong transition-colors group-hover:bg-brand group-hover:text-white">
-                      <item.icon size={20} aria-hidden />
-                    </span>
+                    <ProjectIcon name={project.icon} />
                     <span className="min-w-0">
-                      <span className="block font-semibold">{item.title}</span>
-                      <span className="block text-sm text-muted">{item.example}</span>
+                      <span className="block font-semibold">{project.title}</span>
+                      <span className="block text-sm text-muted">
+                        {project.where} · {project.period}
+                      </span>
+                      <span className="mt-1 block text-sm text-ink-soft">{project.summary}</span>
                     </span>
+                    <ArrowUpRight
+                      size={20}
+                      aria-hidden
+                      className="text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink"
+                    />
                   </Link>
                 </li>
               ))}
             </ul>
-          </nav>
-        </section>
-
-        {/* Projects */}
-        <section className="border-t border-line bg-surface/60">
-          <div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-            <div className="mb-10 max-w-2xl">
-              <h2 id="projects" className="text-3xl font-semibold tracking-tight md:text-4xl">
-                Projects
-              </h2>
-              <p className="mt-3 text-lg text-ink-soft">
-                Products I built at work and on my own. Open any of them for the problem, what I built and how.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-              <ProjectCard project={featured} featured />
-              {rest.map((project, i) => (
-                // A card left alone on the last row of three stretches across it
-                <ProjectCard
-                  key={project.slug}
-                  project={project}
-                  wide={i === rest.length - 1 && (rest.length - 1) % 3 === 1}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Three of the projects run one journey together */}
-        <section aria-labelledby="connected" className="mx-auto max-w-6xl px-4 py-20 md:px-6">
-          <div className="mb-10 max-w-2xl">
-            <h2 id="connected" className="text-3xl font-semibold tracking-tight md:text-4xl">
-              Three apps, one working journey
-            </h2>
-            <p className="mt-3 text-lg text-ink-soft">
-              A website, a CRM and a payment gateway I built separately, connected with signed APIs and webhooks. A quote
-              asked for on one ends up as a paid policy in another.
-            </p>
-          </div>
-          <ProductFlow />
-        </section>
-
-        {/* Story */}
-        <section aria-labelledby="about" className="border-y border-line bg-surface">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-20 md:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.4fr)] lg:py-28">
-            <h2 id="about" className="text-3xl font-semibold tracking-tight lg:sticky lg:top-28 lg:self-start">
-              How I got here
-            </h2>
-            <div className="min-w-0">
-              <ScrollReveal
-                parts={story}
-                className="text-2xl leading-snug font-medium tracking-[-0.01em] text-balance md:text-[2rem] md:leading-[1.3]"
-              />
-              <dl className="mt-14 grid grid-cols-2 border-t border-line lg:grid-cols-4">
-                {stats.map((stat) => (
-                  <div key={stat.value} className="min-w-0 border-b border-line py-6 pe-4 lg:border-b-0">
-                    <dt className="sr-only">{stat.label}</dt>
-                    <dd>
-                      <span className="block text-4xl font-semibold tracking-tight tabular-nums md:text-5xl">
-                        {stat.value}
-                      </span>
-                      <span aria-hidden className="mt-2 block text-sm leading-snug text-muted">
-                        {stat.label}
-                      </span>
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-              <p className="mt-6 text-sm text-muted">BS and MS in Computer Science, NED University of Engineering &amp; Technology</p>
-            </div>
           </div>
         </section>
 
@@ -223,6 +250,7 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <p className="mt-10 text-sm text-muted">BS and MS in Computer Science, NED University of Engineering &amp; Technology</p>
         </section>
 
         {/* Skills */}

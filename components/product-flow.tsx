@@ -1,13 +1,29 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import Image from "next/image";
 import { ProjectIcon } from "@/components/project-icon";
+import { ProjectLinks } from "@/components/project-links";
 import { projectBySlug } from "@/lib/projects";
 
 // Brokwise, PolicyDesk and PaySandbox are three separate apps that run one customer journey together
 const NODES = [
-  { slug: "brokwise", role: "Website", does: "Where the customer asks for a quote and pays" },
-  { slug: "policydesk", role: "CRM", does: "Where the team works the lead, prices plans and books the policy" },
-  { slug: "paysandbox", role: "Payment gateway", does: "Where the card is charged, in test mode" },
+  {
+    slug: "brokwise",
+    role: "Website",
+    does: "Where the customer asks for a quote and pays",
+    shot: { src: "/projects/brokwise/car.webp", alt: "Brokwise car insurance page with \"Get prices now\" and \"Call me back\"" },
+  },
+  {
+    slug: "policydesk",
+    role: "CRM",
+    does: "Where the team works the lead, prices plans and books the policy",
+    shot: { src: "/policydesk-dashboard.webp", alt: "PolicyDesk dashboard with the opportunity funnel, lead pipeline and renewals" },
+  },
+  {
+    slug: "paysandbox",
+    role: "Payment gateway",
+    does: "Where the card is charged, in test mode",
+    shot: { src: "/projects/paysandbox/checkout.webp", alt: "PaySandbox hosted checkout with the order, card form and test cards" },
+  },
 ];
 
 const STEPS = [
@@ -17,8 +33,11 @@ const STEPS = [
   "PaySandbox sends a signed webhook to PolicyDesk, which records the payment and assigns an advisor. Brokwise's thank-you page shows both.",
 ];
 
-/** The three connected projects and the journey that runs through them. `current` highlights one of them. */
-export function ProductFlow({ current }: { current?: string }) {
+/**
+ * The three connected projects and the journey that runs through them. `current` highlights one of them, and
+ * `shots` adds a screenshot to each, for the home page where the reader hasn't seen them yet.
+ */
+export function ProductFlow({ current, shots }: { current?: string; shots?: boolean }) {
   return (
     <div className="min-w-0">
       <ol className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
@@ -31,11 +50,20 @@ export function ProductFlow({ current }: { current?: string }) {
                   <ArrowRight size={20} className="rotate-90 md:rotate-0" />
                 </span>
               )}
-              <Link
-                href={`/projects/${node.slug}`}
+              <div
                 aria-current={node.slug === current ? "page" : undefined}
-                className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-brand/40 aria-[current=page]:border-brand aria-[current=page]:ring-1 aria-[current=page]:ring-brand"
+                className="flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-surface p-5 aria-[current=page]:border-brand aria-[current=page]:ring-1 aria-[current=page]:ring-brand"
               >
+                {shots && (
+                  <Image
+                    src={node.shot.src}
+                    alt={node.shot.alt}
+                    width={2880}
+                    height={1800}
+                    sizes="(min-width: 768px) 30vw, 100vw"
+                    className="aspect-[16/10] w-full rounded-lg border border-line object-cover object-top"
+                  />
+                )}
                 <span className="flex items-center gap-3">
                   <ProjectIcon name={project.icon} />
                   <span className="min-w-0">
@@ -44,7 +72,10 @@ export function ProductFlow({ current }: { current?: string }) {
                   </span>
                 </span>
                 <span className="text-sm leading-snug text-ink-soft">{node.does}</span>
-              </Link>
+                <span className="mt-auto pt-1">
+                  <ProjectLinks project={project} caseStudy={node.slug !== current} />
+                </span>
+              </div>
             </li>
           );
         })}
