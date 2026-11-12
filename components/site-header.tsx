@@ -22,19 +22,33 @@ export function SiteHeader() {
       </a>
       <header className="sticky top-0 z-40 border-b border-line/70 bg-paper/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-          <Link href="/" className="flex items-center gap-2.5 font-semibold" aria-label="Abdul Subhan, home">
+          <Link
+            href="/"
+            data-pulse-event="nav_clicked"
+            data-pulse-label="Home (logo)"
+            className="flex items-center gap-2.5 font-semibold"
+            aria-label="Abdul Subhan, home"
+          >
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-ink text-sm font-bold text-paper">AS</span>
             <span className="hidden sm:inline">{profile.name}</span>
           </Link>
           <nav aria-label="Sections" className="hidden gap-7 text-sm text-ink-soft md:flex">
             {NAV.map((item) => (
-              <Link key={item.href} href={item.href} className="transition-colors hover:text-ink">
+              <Link
+                key={item.href}
+                href={item.href}
+                data-pulse-event="nav_clicked"
+                data-pulse-label={item.label}
+                className="transition-colors hover:text-ink"
+              >
                 {item.label}
               </Link>
             ))}
           </nav>
           <a
             href={profile.cv}
+              data-pulse-event="cv_opened"
+              data-pulse-label="header"
             download
             className="inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-brand-strong"
           >

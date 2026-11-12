@@ -9,6 +9,8 @@ export function CopyEmail({ email }: { email: string }) {
   return (
     <button
       type="button"
+      data-pulse-event="email_copied"
+      data-pulse-label="contact"
       onClick={async () => {
         await navigator.clipboard.writeText(email);
         setCopied(true);

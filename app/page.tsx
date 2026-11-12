@@ -56,15 +56,22 @@ export default function Home() {
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{profile.intro}</p>
 
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#projects" className={primaryButton}>
+              <a href="#projects" data-pulse-event="live_journey_clicked" data-pulse-label="hero" className={primaryButton}>
                 See the live journey
                 <ArrowRight size={16} aria-hidden />
               </a>
-              <a href={profile.cv} download className={quietButton}>
+              <a href={profile.cv} data-pulse-event="cv_opened" data-pulse-label="hero" download className={quietButton}>
                 <Download size={16} aria-hidden />
                 Download CV
               </a>
-              <a href={profile.whatsapp} target="_blank" rel="noreferrer" className={quietButton}>
+              <a
+                href={profile.whatsapp}
+                data-pulse-event="whatsapp_clicked"
+                data-pulse-label="hero"
+                target="_blank"
+                rel="noreferrer"
+                className={quietButton}
+              >
                 <MessageCircle size={16} aria-hidden />
                 WhatsApp
               </a>
@@ -161,7 +168,14 @@ export default function Home() {
             <p className="mt-3 text-lg text-ink-soft">
               Insurtech for the UAE and Bahrain, in English and Arabic. This is company work, so there is no public demo; the
               customer side is live on{" "}
-              <a href="https://insurancemarket.ae" target="_blank" rel="noreferrer" className={inlineLink}>
+              <a
+                href="https://insurancemarket.ae"
+                data-pulse-event="site_opened"
+                data-pulse-label="insurancemarket.ae"
+                target="_blank"
+                rel="noreferrer"
+                className={inlineLink}
+              >
                 insurancemarket.ae
               </a>
               , and each case study shows what I built and how.
@@ -172,6 +186,8 @@ export default function Home() {
               <li key={item.slug} className="min-w-0">
                 <Link
                   href={`/projects/${item.slug}`}
+                  data-pulse-event="project_opened"
+                  data-pulse-label={item.slug}
                   className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-5 transition-[border-color,box-shadow] hover:border-ink/25 hover:shadow-[0_20px_40px_-24px_rgb(16_32_27/0.3)]"
                 >
                   <span className="text-4xl font-semibold tracking-tight tabular-nums">{item.value}</span>
@@ -197,6 +213,8 @@ export default function Home() {
                 <li key={project.slug}>
                   <Link
                     href={`/projects/${project.slug}`}
+                    data-pulse-event="project_opened"
+                    data-pulse-label={project.slug}
                     className="group grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 py-4"
                   >
                     <ProjectIcon name={project.icon} />
@@ -242,6 +260,8 @@ export default function Home() {
                       <li key={slug}>
                         <Link
                           href={`/projects/${slug}`}
+                          data-pulse-event="project_opened"
+                          data-pulse-label={slug}
                           className="inline-flex items-center gap-1 rounded-full border border-line bg-surface px-3 py-1 text-sm text-ink-soft transition-colors hover:border-brand/40 hover:text-brand-strong"
                         >
                           {projectBySlug(slug)?.title}
@@ -296,19 +316,47 @@ export default function Home() {
               <CopyEmail email={profile.email} />
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={profile.whatsapp} target="_blank" rel="noreferrer" className={lightButton}>
+              <a
+                href={profile.whatsapp}
+                data-pulse-event="whatsapp_clicked"
+                data-pulse-label="contact"
+                target="_blank"
+                rel="noreferrer"
+                className={lightButton}
+              >
                 <MessageCircle size={16} aria-hidden />
                 WhatsApp
               </a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className={darkButton}>
+              <a
+                href={profile.linkedin}
+                data-pulse-event="linkedin_opened"
+                data-pulse-label="contact"
+                target="_blank"
+                rel="noreferrer"
+                className={darkButton}
+              >
                 <LinkedInIcon size={16} />
                 LinkedIn
               </a>
-              <a href={profile.github} target="_blank" rel="noreferrer" className={darkButton}>
+              <a
+                href={profile.github}
+                data-pulse-event="github_opened"
+                data-pulse-label="contact"
+                target="_blank"
+                rel="noreferrer"
+                className={darkButton}
+              >
                 <GitHubIcon size={16} />
                 GitHub
               </a>
-              <a href={profile.cv} target="_blank" rel="noreferrer" className={darkButton}>
+              <a
+                href={profile.cv}
+                data-pulse-event="cv_opened"
+                data-pulse-label="contact"
+                target="_blank"
+                rel="noreferrer"
+                className={darkButton}
+              >
                 <FileText size={16} aria-hidden />
                 View CV
               </a>
@@ -319,6 +367,8 @@ export default function Home() {
               Built by me with Next.js and Tailwind CSS.{" "}
               <a
                 href="https://github.com/AbdulSubhan1/abdulsubhan1.github.io"
+                data-pulse-event="source_code_opened"
+                data-pulse-label="portfolio"
                 className="underline hover:text-white"
                 target="_blank"
                 rel="noreferrer"

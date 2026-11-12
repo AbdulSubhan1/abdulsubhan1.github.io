@@ -10,25 +10,51 @@ export function ProjectLinks({ project, caseStudy = true }: { project: Project; 
   return (
     <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
       {links?.live && (
-        <a href={links.live} target="_blank" rel="noreferrer" className={link}>
+        <a
+          href={links.live}
+          data-pulse-event="live_demo_opened"
+          data-pulse-label={project.slug}
+          target="_blank"
+          rel="noreferrer"
+          className={link}
+        >
           Live demo
           <ArrowUpRight size={14} aria-hidden />
         </a>
       )}
       {links?.code && (
-        <a href={links.code} target="_blank" rel="noreferrer" className={link}>
+        <a
+          href={links.code}
+          data-pulse-event="source_code_opened"
+          data-pulse-label={project.slug}
+          target="_blank"
+          rel="noreferrer"
+          className={link}
+        >
           Code
           <ArrowUpRight size={14} aria-hidden />
         </a>
       )}
       {links?.site && (
-        <a href={links.site} target="_blank" rel="noreferrer" className={link}>
+        <a
+          href={links.site}
+          data-pulse-event="site_opened"
+          data-pulse-label={project.slug}
+          target="_blank"
+          rel="noreferrer"
+          className={link}
+        >
           {new URL(links.site).hostname}
           <ArrowUpRight size={14} aria-hidden />
         </a>
       )}
       {caseStudy && (
-        <Link href={`/projects/${project.slug}`} className={link}>
+        <Link
+          href={`/projects/${project.slug}`}
+          data-pulse-event="project_opened"
+          data-pulse-label={project.slug}
+          className={link}
+        >
           Case study
           <ArrowRight size={14} aria-hidden />
         </Link>

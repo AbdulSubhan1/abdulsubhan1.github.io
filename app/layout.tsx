@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic, Schibsted_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "lenis/dist/lenis.css";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import "./globals.css";
@@ -29,6 +30,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className={`${schibsted.variable} ${plexArabic.variable} font-sans antialiased`}>
         <SmoothScroll />
         {children}
+        {/* Pulse, my own monitor: cookie-free page views, CV and WhatsApp clicks, browser errors */}
+        <Script src="https://abdulsubhan-pulse.vercel.app/beacon.js" data-project="portfolio" strategy="afterInteractive" />
       </body>
     </html>
   );
