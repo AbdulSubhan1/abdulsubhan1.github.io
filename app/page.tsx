@@ -13,8 +13,8 @@ import { STACK, Tech } from "@/components/tech";
 import { experience, profile, skills, workHighlights } from "@/lib/data";
 import { JOURNEY_VIDEO, PROJECTS, projectBySlug } from "@/lib/projects";
 
-// The journey section shows the three connected apps; these two live projects sit under it
-const ALSO_LIVE = ["jobfit", "crm-kit"];
+// The journey section shows the three connected apps; these live projects sit under it
+const ALSO_LIVE = ["jobfit", "pulse", "crm-kit"];
 // Everything not shown in the first sections goes in "More work", in the order of PROJECTS
 const SHOWN = new Set([
   ...PROJECTS.filter((p) => p.connected).map((p) => p.slug),
@@ -139,7 +139,7 @@ export default function Home() {
             </div>
 
             <h3 className="mt-16 text-sm font-medium text-muted">Also live</h3>
-            <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {alsoLive.map((project) => (
                 <li key={project.slug} className="flex min-w-0 gap-4 rounded-2xl border border-line bg-surface p-5">
                   <ProjectIcon name={project.icon} />

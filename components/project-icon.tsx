@@ -1,4 +1,5 @@
 import {
+  Activity,
   Bot,
   Building2,
   Car,
@@ -29,6 +30,7 @@ const ICONS = {
   scan: ScanSearch,
   car: Car,
   review: GitPullRequest,
+  pulse: Activity,
 } as const;
 
 /** A project's icon in a soft teal tile. */

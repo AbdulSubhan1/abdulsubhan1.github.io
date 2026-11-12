@@ -14,7 +14,8 @@ export type ProjectIcon =
   | "card"
   | "scan"
   | "car"
-  | "review";
+  | "review"
+  | "pulse";
 
 export type Shot = { src: string; alt: string; width: number; height: number };
 
@@ -284,6 +285,53 @@ export const PROJECTS: Project[] = [
       "Runs on free tiers end to end",
     ],
     result: ["Live on Vercel; the match score and a full sample work without signing in"],
+  },
+  {
+    slug: "pulse",
+    title: "Pulse",
+    category: "Monitoring",
+    icon: "pulse",
+    summary: "One small app that watches all my live projects: uptime, page views and clicks, speed, errors, API calls and login attacks.",
+    where: "Personal project",
+    period: "2026",
+    role: "Design, build and deployment",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Drizzle", "PostgreSQL", "Upstash QStash", "Zod", "Vitest", "GitHub Actions"],
+    links: {
+      live: "https://abdulsubhan-pulse.vercel.app",
+      code: "https://github.com/AbdulSubhan1/monitor",
+    },
+    cover: {
+      src: "/projects/pulse/dashboard.webp",
+      alt: "Pulse overview: all five projects up, with uptime, views, errors, a 7-day chart and Core Web Vitals for each, and a security alert banner",
+      width: 2880,
+      height: 1800,
+    },
+    gallery: [
+      {
+        src: "/projects/pulse/project.webp",
+        alt: "The portfolio's page in Pulse: the uptime strip, page views per day, top pages, labelled clicks and real-visitor performance",
+        width: 2880,
+        height: 1800,
+      },
+    ],
+    problem:
+      "I run five live projects: this portfolio and four Next.js apps. I had no single place to see if they were up, whether anyone visited, or whether anything was failing. The usual answer is three vendors, an uptime robot, a tag manager or pixel, and a log service, which means three scripts, three accounts and cookies I don't need.",
+    built: [
+      "Uptime: every site is checked every 10 minutes, in parallel, and kept as history",
+      "A cookie-free script tag on each site that sends page views, every button click as a named event, browser errors and Core Web Vitals from real visitors",
+      "One endpoint where each app's server sends its errors and every API call it makes; Next.js apps send server errors automatically",
+      "Brute-force detection: many failures from one source, password guessing on one account, password spraying, and a sign-in right after failures",
+      "One dashboard with status, uptime, traffic, errors and speed for each project, and a logs page with filters",
+    ],
+    approach: [
+      "Built the ingest instead of renting it: who may write, what shape is accepted, what is never stored and when data is deleted are all explicit",
+      "Privacy by design: no cookies, ids or IPs; paths lose their query string, and emails and IPs in security events become keyed hashes, so attempts still group but nothing readable is stored",
+      "Writes are locked down without a login: the script only accepts its project's own sites, and each server has its own token, derived from one secret, so a leaked token can't write as another project",
+      "The monitor can never break the apps: the script doesn't block the page, and server reporting gives up after 2 seconds and ignores failures",
+      "Fits the free tier: a free QStash schedule runs the 10-minute check (GitHub's schedule was unreliable), every table has a daily cap, and data older than 30 days is deleted",
+      "Small on purpose: no chart library (the charts are SVG), and projects are a typed list in code, not an admin screen",
+    ],
+    result: ["Live on Vercel, checking all five projects; this portfolio and Brokwise send page views, clicks and errors to it"],
   },
   {
     slug: "crm-kit",
