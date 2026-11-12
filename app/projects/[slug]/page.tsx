@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DirectionDemo } from "@/components/direction-demo";
+import { ProductFlow } from "@/components/product-flow";
 import { ProjectIcon } from "@/components/project-icon";
 import { SiteHeader } from "@/components/site-header";
 import { GitHubIcon } from "@/components/social-icons";
@@ -181,6 +182,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <div className="max-w-md">
                   <DirectionDemo />
                 </div>
+              </Section>
+            )}
+            {project.connected && (
+              <Section title="How it connects">
+                <p className="mb-6">
+                  Brokwise, PolicyDesk and PaySandbox are three separate apps, each with its own repo and deployment. Together
+                  they run one real customer journey.
+                </p>
+                <ProductFlow current={project.slug} />
               </Section>
             )}
             {project.result && (
