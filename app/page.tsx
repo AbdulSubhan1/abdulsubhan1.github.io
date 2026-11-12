@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand-icon";
 import { CopyEmail } from "@/components/copy-email";
+import { DemoVideo } from "@/components/demo-video";
 import { ProductFlow } from "@/components/product-flow";
 import { ProjectIcon } from "@/components/project-icon";
 import { ProjectLinks } from "@/components/project-links";
@@ -10,7 +11,7 @@ import { SiteHeader } from "@/components/site-header";
 import { GitHubIcon, LinkedInIcon } from "@/components/social-icons";
 import { STACK, Tech } from "@/components/tech";
 import { experience, profile, skills, workHighlights } from "@/lib/data";
-import { PROJECTS, projectBySlug } from "@/lib/projects";
+import { JOURNEY_VIDEO, PROJECTS, projectBySlug } from "@/lib/projects";
 
 // The journey section shows the three connected apps; these two live projects sit under it
 const ALSO_LIVE = ["jobfit", "crm-kit"];
@@ -126,6 +127,9 @@ export default function Home() {
               </p>
             </div>
             <ProductFlow shots />
+            <div className="mt-12">
+              <DemoVideo video={JOURNEY_VIDEO} caption="Watch the whole journey" />
+            </div>
 
             <h3 className="mt-16 text-sm font-medium text-muted">Also live</h3>
             <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">

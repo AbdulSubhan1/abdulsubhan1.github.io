@@ -18,6 +18,17 @@ export type ProjectIcon =
 
 export type Shot = { src: string; alt: string; width: number; height: number };
 
+/** A recorded walkthrough of a live app, in public/: captions are part of the video, there is no sound. */
+export type Video = { src: string; poster: string; title: string; duration: string };
+
+/** The whole Brokwise → PolicyDesk → PaySandbox journey in one recording, shown on the home page. */
+export const JOURNEY_VIDEO: Video = {
+  src: "/videos/journey.mp4",
+  poster: "/videos/journey-poster.webp",
+  title: "One journey, three apps: a customer buys car insurance online",
+  duration: "2:57",
+};
+
 /** One step of a "How it works" diagram. `stop` is what happens when this check ends the run early. */
 export type FlowStep = {
   title: string;
@@ -43,6 +54,8 @@ export type Project = {
   links?: { live?: string; code?: string; site?: string };
   cover?: Shot;
   gallery?: Shot[];
+  /** A walkthrough video, shown above the screenshots. */
+  video?: Video;
   problem: string;
   built: string[];
   /** How it was built: the decisions worth explaining in an interview. */
@@ -77,9 +90,15 @@ export const PROJECTS: Project[] = [
       live: "https://policydesk-opal.vercel.app/login",
       code: "https://github.com/AbdulSubhan1/policydesk",
     },
+    video: {
+      src: "/projects/policydesk/demo.mp4",
+      poster: "/projects/policydesk/demo-poster.webp",
+      title: "PolicyDesk walkthrough: roles, leads, a paid website lead, KYC and Arabic",
+      duration: "2:23",
+    },
     cover: {
       src: "/policydesk-lead.webp",
-      alt: "PolicyDesk lead page: progress from quote to paid, quotes from two insurers, and the customer card",
+      alt: "PolicyDesk lead page: the customer paid $1,170 online on the website, the progress rail with Paid done, and the next step",
       width: 2880,
       height: 1060,
     },
@@ -127,6 +146,12 @@ export const PROJECTS: Project[] = [
       live: "https://paysandbox.vercel.app",
       code: "https://github.com/AbdulSubhan1/paysandbox",
     },
+    video: {
+      src: "/projects/paysandbox/demo.mp4",
+      poster: "/projects/paysandbox/demo-poster.webp",
+      title: "PaySandbox walkthrough: the dashboard, a partial refund, a dispute won, webhooks and the API log",
+      duration: "2:00",
+    },
     cover: {
       src: "/projects/paysandbox/checkout.webp",
       alt: "PaySandbox hosted checkout: the order on the left, the card form and clickable test cards on the right, under a test mode banner",
@@ -136,13 +161,13 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         src: "/projects/paysandbox/dashboard.webp",
-        alt: "Merchant dashboard: volume, failed and disputed totals, payments by status, recent payments and webhooks",
+        alt: "Merchant dashboard: net volume, successful payments, refunds and disputes, volume per day, what needs attention and the latest payments",
         width: 2880,
         height: 1800,
       },
       {
         src: "/projects/paysandbox/payments.webp",
-        alt: "Payments list with status filters, the card used and the payment ID",
+        alt: "Payments list: status filters with counts, search, what was bought, the customer, the card and the amount",
         width: 2880,
         height: 1800,
       },
@@ -179,16 +204,22 @@ export const PROJECTS: Project[] = [
     role: "Design, frontend, integration and deployment",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     links: { live: "https://brokwise.vercel.app" },
+    video: {
+      src: "/projects/brokwise/demo.mp4",
+      poster: "/projects/brokwise/demo-poster.webp",
+      title: "Brokwise walkthrough: the forms, prices from your answers, and agreeing to the terms before paying",
+      duration: "2:34",
+    },
     cover: {
       src: "/projects/brokwise/home.webp",
-      alt: "Brokwise home page: \"Insurance, the wise way\", with car insurance open and other lines coming soon",
+      alt: "Brokwise home page: car, travel, home and health insurance, how it works, and the trust strip",
       width: 2880,
       height: 1800,
     },
     gallery: [
       {
         src: "/projects/brokwise/car.webp",
-        alt: "Car insurance: choose \"Get prices now\" or \"Call me back\"",
+        alt: "Car plans priced from the customer's answers: insurer badges, Cheapest and Best value tags, add-ons, and the coordinator in the header",
         width: 2880,
         height: 1800,
       },
