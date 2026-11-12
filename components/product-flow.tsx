@@ -1,0 +1,75 @@
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { ProjectIcon } from "@/components/project-icon";
+import { projectBySlug } from "@/lib/projects";
+
+// Brokwise, PolicyDesk and PaySandbox are three separate apps that run one customer journey together
+const NODES = [
+  { slug: "brokwise", role: "Website", does: "Where the customer asks for a quote and pays" },
+  { slug: "policydesk", role: "CRM", does: "Where the team works the lead, prices plans and books the policy" },
+  { slug: "paysandbox", role: "Payment gateway", does: "Where the card is charged, in test mode" },
+];
+
+const STEPS = [
+  "A visitor asks for car insurance on Brokwise. Brokwise sends a signed server-to-server request, and PolicyDesk creates the lead and assigns a coordinator.",
+  "Brokwise shows plans and add-ons priced by PolicyDesk. The plan the visitor picks is saved in PolicyDesk as a quote.",
+  "Pay asks PolicyDesk to open a PaySandbox checkout session, and the visitor pays on PaySandbox's hosted checkout with a test card.",
+  "PaySandbox sends a signed webhook to PolicyDesk, which records the payment and assigns an advisor. Brokwise's thank-you page shows both.",
+];
+
+/** The three connected projects and the journey that runs through them. `current` highlights one of them. */
+export function ProductFlow({ current }: { current?: string }) {
+  return (
+    <div className="min-w-0">
+      <ol className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
+        {NODES.map((node, i) => {
+          const project = projectBySlug(node.slug)!;
+          return (
+            <li key={node.slug} className="contents">
+              {i > 0 && (
+                <span aria-hidden className="grid place-items-center text-muted">
+                  <ArrowRight size={20} className="rotate-90 md:rotate-0" />
+                </span>
+              )}
+              <Link
+                href={`/projects/${node.slug}`}
+                aria-current={node.slug === current ? "page" : undefined}
+                className="group flex min-w-0 flex-col gap-3 rounded-2xl border border-line bg-surface p-5 transition-colors hover:border-brand/40 aria-[current=page]:border-brand aria-[current=page]:ring-1 aria-[current=page]:ring-brand"
+              >
+                <span className="flex items-center gap-3">
+                  <ProjectIcon name={project.icon} />
+                  <span className="min-w-0">
+                    <span className="block text-sm text-muted">{node.role}</span>
+                    <span className="block font-semibold text-ink">{project.title}</span>
+                  </span>
+                </span>
+                <span className="text-sm leading-snug text-ink-soft">{node.does}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ol>
+
+      <ol className="mt-8 grid gap-4">
+        {STEPS.map((step, i) => (
+          <li key={step} className="flex gap-4">
+            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-soft text-sm font-semibold text-brand-strong tabular-nums">
+              {i + 1}
+            </span>
+            <span className="min-w-0 text-ink-soft">{step}</span>
+          </li>
+        ))}
+      </ol>
+
+      <a
+        href="https://brokwise.vercel.app/car"
+        target="_blank"
+        rel="noreferrer"
+        className="mt-8 inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-paper transition-colors hover:bg-brand-strong"
+      >
+        Try the journey on Brokwise
+        <ArrowUpRight size={16} aria-hidden />
+      </a>
+    </div>
+  );
+}

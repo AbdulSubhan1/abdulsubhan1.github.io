@@ -1,7 +1,19 @@
 // Every project in the portfolio. Each entry gets a card on the home page and its own page at /projects/<slug>.
 // To add a new project, add an entry here (and its screenshots to public/projects/<slug>/).
 
-export type ProjectIcon = "shield" | "cart" | "layout" | "smartphone" | "search" | "bot" | "building" | "globe" | "puzzle";
+export type ProjectIcon =
+  | "shield"
+  | "cart"
+  | "layout"
+  | "smartphone"
+  | "search"
+  | "bot"
+  | "building"
+  | "globe"
+  | "puzzle"
+  | "card"
+  | "scan"
+  | "car";
 
 export type Shot = { src: string; alt: string; width: number; height: number };
 
@@ -28,6 +40,8 @@ export type Project = {
   result?: string[];
   /** Shows the English/Arabic card on the project page. */
   bilingualDemo?: boolean;
+  /** Part of the Brokwise → PolicyDesk → PaySandbox journey; shows how the three connect. */
+  connected?: boolean;
   featured?: boolean;
 };
 
@@ -68,6 +82,7 @@ export const PROJECTS: Project[] = [
       "English and Arabic for the interface, validation messages and stored data, with a mirrored right-to-left layout",
       "Its own UI library of 54 components, with a docs-style component library inside the app",
       "An in-app knowledge base with a training guide, and Playwright tests for every role's journey",
+      "A signed website API, so Brokwise can create leads, price plans and take payments through PaySandbox",
     ],
     approach: [
       "Server Components fetch data on the server; every change goes through a Server Action that checks the permission, validates with the same Zod schema the form uses, and writes an audit entry",
@@ -79,7 +94,149 @@ export const PROJECTS: Project[] = [
       "Its foundations became the CRM Kit, so the next product starts from the same standard",
     ],
     bilingualDemo: true,
+    connected: true,
     featured: true,
+  },
+  {
+    slug: "paysandbox",
+    title: "PaySandbox",
+    category: "Payment gateway",
+    icon: "card",
+    summary: "Stripe-style test mode as a product: a real checkout, webhooks, refunds and disputes for demos and MVPs, with no real money.",
+    where: "Personal project",
+    period: "2026",
+    role: "Product design, full-stack build, testing and deployment",
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "Drizzle", "Better Auth", "Upstash QStash", "Playwright", "Vercel"],
+    links: {
+      live: "https://paysandbox.vercel.app",
+      code: "https://github.com/AbdulSubhan1/paysandbox",
+    },
+    cover: {
+      src: "/projects/paysandbox/checkout.webp",
+      alt: "PaySandbox hosted checkout: the order on the left, the card form and clickable test cards on the right, under a test mode banner",
+      width: 2880,
+      height: 1800,
+    },
+    gallery: [
+      {
+        src: "/projects/paysandbox/dashboard.webp",
+        alt: "Merchant dashboard: volume, failed and disputed totals, payments by status, recent payments and webhooks",
+        width: 2880,
+        height: 1800,
+      },
+      {
+        src: "/projects/paysandbox/payments.webp",
+        alt: "Payments list with status filters, the card used and the payment ID",
+        width: 2880,
+        height: 1800,
+      },
+    ],
+    problem:
+      "Demo sites and side projects need a payment step that behaves like the real thing: a hosted checkout, declined cards, OTP, webhooks and refunds. Getting test keys from a real gateway usually needs a registered business, so most portfolios fake a \"Payment successful\" page, which proves nothing.",
+    built: [
+      "A hosted checkout on PaySandbox's own URL with a permanent test mode banner, and test cards for success, declines, expired cards and 3-D Secure OTP",
+      "A REST API with secret keys, Idempotency-Key support, daily usage caps and an OpenAPI 3.1 spec",
+      "Signed webhooks for payments, refunds and disputes, retried on a schedule and paused after repeated failures",
+      "A merchant dashboard: totals, payments with a timeline each, partial refunds, simulated disputes, customers, a webhook log with resend and an API request log",
+      "Invite-only GitHub sign-in, with up to three projects per account",
+    ],
+    approach: [
+      "Card numbers that look real are refused in the browser and again on the server, so nobody can type in a real card by mistake",
+      "Idempotency keys make retries safe: the same request sent twice gives the same result instead of a second charge",
+      "Webhooks follow the Standard Webhooks spec; each event keeps the same ID across retries, so receivers can drop duplicates. Timers and retries run on Upstash QStash",
+      "Built in stages (the payment loop, then webhooks, refunds and disputes, then the dashboard), each one reviewed and tested before merging",
+    ],
+    result: [
+      "Live on Vercel with Neon Postgres; 400+ unit tests and Playwright suites for desktop and mobile run in CI",
+      "Brokwise, my demo insurance website, takes its payments through it",
+    ],
+    connected: true,
+  },
+  {
+    slug: "jobfit",
+    title: "JobFit",
+    category: "AI web app",
+    icon: "scan",
+    summary: "Paste a job post, drop your CV, and see your match score and missing skills, with AI help that never sees your personal details.",
+    where: "Personal project",
+    period: "2026",
+    role: "Design, frontend, AI integration and deployment",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel AI SDK", "Auth.js", "Upstash Redis", "next-intl", "Playwright"],
+    links: {
+      live: "https://jobfit-tan.vercel.app",
+      code: "https://github.com/AbdulSubhan1/jobfit",
+    },
+    cover: {
+      src: "/projects/jobfit/home.webp",
+      alt: "JobFit home page: \"Does your CV fit the job?\" with a sample 72% match card",
+      width: 2880,
+      height: 1800,
+    },
+    gallery: [
+      {
+        src: "/projects/jobfit/result.webp",
+        alt: "A sample result: 69% match, the skills found and missing, and an AI cover letter",
+        width: 2880,
+        height: 1800,
+      },
+    ],
+    problem:
+      "Job seekers send the same CV everywhere without knowing which skills a job's screening looks for. AI tools can help, but most want the whole CV, with name, phone and address, sent to their servers.",
+    built: [
+      "A match score and the missing skills, worked out in the browser: the PDF is read on the user's device and never uploaded",
+      "AI-rewritten CV bullets, a cover letter and interview prep for signed-in users, streamed as they are written",
+      "Masking before the AI: name, email, phone, address, links and ID numbers become tags like [EMAIL-1]; users can hide any other word, and the real values come back only on their own screen",
+      "Google or GitHub sign-in, with a daily AI limit per user",
+      "English and Arabic, and its own UI library, browsable inside the app",
+    ],
+    approach: [
+      "The AI provider is configuration, not code: one adapter on the Vercel AI SDK switches between Gemini, Groq, OpenAI, Anthropic or a local Ollama with two environment variables",
+      "The server checks every AI request again and rejects it if it still contains an email, phone number or link",
+      "No database of CVs: the only stored state is a daily counter per user in Upstash Redis",
+      "Runs on free tiers end to end",
+    ],
+    result: ["Live on Vercel; the match score and a full sample work without signing in"],
+  },
+  {
+    slug: "brokwise",
+    title: "Brokwise",
+    category: "Website",
+    icon: "car",
+    summary: "A demo insurance broker website that sells car insurance through PolicyDesk and takes payment with PaySandbox.",
+    where: "Personal project",
+    period: "2026",
+    role: "Design, frontend, integration and deployment",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    links: { live: "https://brokwise.vercel.app" },
+    cover: {
+      src: "/projects/brokwise/home.webp",
+      alt: "Brokwise home page: \"Insurance, the wise way\", with car insurance open and other lines coming soon",
+      width: 2880,
+      height: 1800,
+    },
+    gallery: [
+      {
+        src: "/projects/brokwise/car.webp",
+        alt: "Car insurance: choose \"Get prices now\" or \"Call me back\"",
+        width: 2880,
+        height: 1800,
+      },
+    ],
+    problem:
+      "PolicyDesk and PaySandbox each worked on their own, but a CRM and a payment gateway only prove themselves when a real customer journey runs through both: a visitor asks for a quote, the team follows up, and a payment closes the sale.",
+    built: [
+      "A car insurance journey: \"Get prices now\" or \"Call me back\", a full or short form, plans with add-ons and a live total, then payment and a thank-you page",
+      "Every form creates records in PolicyDesk through its private website API, which assigns a coordinator automatically",
+      "Plans and prices come from PolicyDesk, and the chosen plan is saved there as a quote",
+      "Payment opens PaySandbox's hosted checkout; once the webhook arrives, the thank-you page shows the paid order and the advisor assigned",
+    ],
+    approach: [
+      "The website has no database: every call to PolicyDesk is a signed server-to-server request, and the visitor's progress is kept in a signed, http-only cookie",
+      "PolicyDesk, not the website, talks to PaySandbox and receives its webhook, so the payment is recorded where the team works",
+      "Every person, insurer and number on the site is made up",
+    ],
+    result: ["Live on Vercel, connected to the live PolicyDesk and PaySandbox"],
+    connected: true,
   },
   {
     slug: "insurance-purchase-journeys",

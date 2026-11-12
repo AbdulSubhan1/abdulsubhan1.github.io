@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { BrandIcon } from "@/components/brand-icon";
 import { CopyEmail } from "@/components/copy-email";
+import { ProductFlow } from "@/components/product-flow";
 import { ProjectCard } from "@/components/project-card";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { SiteHeader } from "@/components/site-header";
@@ -28,8 +29,8 @@ const RANGE: { icon: LucideIcon; title: string; example: string; slug: string }[
   { icon: LayoutDashboard, title: "Dashboards", example: "ERP for enterprise clients", slug: "erp-dashboards" },
   { icon: Smartphone, title: "Mobile apps", example: "Three-role food delivery app", slug: "food-delivery-app" },
   { icon: Search, title: "Content and SEO", example: "A 270+ page site that ranks", slug: "seo-content-platform" },
-  { icon: Plug, title: "APIs and integrations", example: "Insurers, payments, KYC", slug: "insurance-purchase-journeys" },
-  { icon: Bot, title: "AI tooling", example: "MCP servers and Claude plugins", slug: "ai-developer-tooling" },
+  { icon: Plug, title: "APIs and payments", example: "A payment gateway with webhooks", slug: "paysandbox" },
+  { icon: Bot, title: "AI products", example: "CV matching with private AI", slug: "jobfit" },
 ];
 
 const primaryButton =
@@ -140,6 +141,20 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </section>
+
+        {/* Three of the projects run one journey together */}
+        <section aria-labelledby="connected" className="mx-auto max-w-6xl px-4 py-20 md:px-6">
+          <div className="mb-10 max-w-2xl">
+            <h2 id="connected" className="text-3xl font-semibold tracking-tight md:text-4xl">
+              Three apps, one working journey
+            </h2>
+            <p className="mt-3 text-lg text-ink-soft">
+              A website, a CRM and a payment gateway I built separately, connected with signed APIs and webhooks. A quote
+              asked for on one ends up as a paid policy in another.
+            </p>
+          </div>
+          <ProductFlow />
         </section>
 
         {/* Story */}

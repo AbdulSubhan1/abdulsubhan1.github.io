@@ -1,4 +1,17 @@
-import { Bot, Building2, Globe, LayoutDashboard, Puzzle, Search, ShieldCheck, ShoppingCart, Smartphone } from "lucide-react";
+import {
+  Bot,
+  Building2,
+  Car,
+  CreditCard,
+  Globe,
+  LayoutDashboard,
+  Puzzle,
+  ScanSearch,
+  Search,
+  ShieldCheck,
+  ShoppingCart,
+  Smartphone,
+} from "lucide-react";
 import type { ProjectIcon as IconName } from "@/lib/projects";
 
 const ICONS = {
@@ -11,6 +24,9 @@ const ICONS = {
   building: Building2,
   globe: Globe,
   puzzle: Puzzle,
+  card: CreditCard,
+  scan: ScanSearch,
+  car: Car,
 } as const;
 
 /** A project's icon in a soft teal tile. */
