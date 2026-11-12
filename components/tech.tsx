@@ -2,6 +2,7 @@ import {
   siAnthropic,
   siDrizzle,
   siGithub,
+  siGithubactions,
   siGooglemaps,
   siI18next,
   siNestjs,
@@ -15,6 +16,7 @@ import {
   siUpstash,
   siVercel,
   siWordpress,
+  siZod,
   type SimpleIcon,
 } from "simple-icons";
 import { BrandIcon } from "./brand-icon";
@@ -41,6 +43,8 @@ const LOGOS: Record<string, SimpleIcon> = {
   "Redux Toolkit": siRedux,
   "Google Maps": siGooglemaps,
   "GitHub API": siGithub,
+  "GitHub Actions": siGithubactions,
+  Zod: siZod,
   "next-intl": siI18next,
   "next-intl (RTL)": siI18next,
   "i18n (RTL)": siI18next,

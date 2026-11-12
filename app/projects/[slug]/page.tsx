@@ -1,9 +1,10 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, Briefcase, CalendarDays, Globe, UserRound } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Briefcase, CalendarDays, Globe, PencilRuler, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { DirectionDemo } from "@/components/direction-demo";
+import { FlowDiagram } from "@/components/flow-diagram";
 import { ProductFlow } from "@/components/product-flow";
 import { ProjectIcon } from "@/components/project-icon";
 import { SiteHeader } from "@/components/site-header";
@@ -93,6 +94,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
             <p className="mt-6 max-w-3xl text-xl leading-relaxed text-ink-soft">{project.summary}</p>
+            {project.design && (
+              <p className="mt-5 flex max-w-3xl items-start gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4 text-amber-900">
+                <PencilRuler size={18} aria-hidden className="mt-0.5 shrink-0" />
+                <span>
+                  <span className="font-semibold">Design, build planned.</span> This page shows how it works and how it
+                  would be set up. It gets screenshots and a link to the code once it runs on my own repos.
+                </span>
+              </p>
+            )}
 
             <dl className="mt-8 grid grid-cols-1 gap-4 text-sm sm:grid-cols-3">
               {[
@@ -165,12 +175,46 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <Section title="The problem">
               <p>{project.problem}</p>
             </Section>
-            <Section title="What I built">
+            <Section title={project.design ? "What it does" : "What I built"}>
               <Points items={project.built} />
             </Section>
+            {project.flow && (
+              <Section title="How it works">
+                <FlowDiagram steps={project.flow.steps} note={project.flow.note} />
+              </Section>
+            )}
+            {project.samples && (
+              <Section title="What the PR author sees">
+                <ul className="grid gap-3">
+                  {project.samples.map((sample) => (
+                    <li key={sample.when} className="min-w-0 rounded-2xl border border-line bg-surface p-4">
+                      <span className="block text-sm text-muted">{sample.when}</span>
+                      <span className="mt-1 block text-base text-ink">{sample.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+            )}
             {project.approach && (
-              <Section title="How I built it">
+              <Section title={project.design ? "Design decisions" : "How I built it"}>
                 <Points items={project.approach} />
+              </Section>
+            )}
+            {project.setup && (
+              <Section title={project.design ? "How to set it up (planned)" : "How to set it up"}>
+                <ol className="grid gap-3">
+                  {project.setup.steps.map((step, i) => (
+                    <li key={step} className="flex gap-4">
+                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-soft text-sm font-semibold text-brand-strong tabular-nums">
+                        {i + 1}
+                      </span>
+                      <span className="min-w-0">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+                <pre className="mt-6 overflow-x-auto rounded-xl bg-night p-5 font-mono text-sm leading-relaxed text-white/85">
+                  <code>{project.setup.snippet}</code>
+                </pre>
               </Section>
             )}
             {project.bilingualDemo && (

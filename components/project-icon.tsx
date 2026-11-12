@@ -3,6 +3,7 @@ import {
   Building2,
   Car,
   CreditCard,
+  GitPullRequest,
   Globe,
   LayoutDashboard,
   Puzzle,
@@ -27,6 +28,7 @@ const ICONS = {
   card: CreditCard,
   scan: ScanSearch,
   car: Car,
+  review: GitPullRequest,
 } as const;
 
 /** A project's icon in a soft teal tile. */
