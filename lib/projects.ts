@@ -98,7 +98,7 @@ export const PROJECTS: Project[] = [
     },
     cover: {
       src: "/policydesk-lead.webp",
-      alt: "PolicyDesk lead page: progress from quote to paid, quotes from two insurers, and the customer card",
+      alt: "PolicyDesk lead page: the customer paid $1,170 online on the website, the progress rail with Paid done, and the next step",
       width: 2880,
       height: 1060,
     },
@@ -206,14 +206,14 @@ export const PROJECTS: Project[] = [
     },
     cover: {
       src: "/projects/brokwise/home.webp",
-      alt: "Brokwise home page: \"Insurance, the wise way\", with car insurance open and other lines coming soon",
+      alt: "Brokwise home page: car, travel, home and health insurance, how it works, and the trust strip",
       width: 2880,
       height: 1800,
     },
     gallery: [
       {
         src: "/projects/brokwise/car.webp",
-        alt: "Car insurance: choose \"Get prices now\" or \"Call me back\"",
+        alt: "Car plans priced from the customer's answers: insurer badges, Cheapest and Best value tags, add-ons, and the coordinator in the header",
         width: 2880,
         height: 1800,
       },
