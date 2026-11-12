@@ -60,11 +60,11 @@ export default function Home() {
                 See the live journey
                 <ArrowRight size={16} aria-hidden />
               </a>
-              <a href={profile.cv} download className={quietButton}>
+              <a href={profile.cv} data-pulse-event="cv_downloaded" download className={quietButton}>
                 <Download size={16} aria-hidden />
                 Download CV
               </a>
-              <a href={profile.whatsapp} target="_blank" rel="noreferrer" className={quietButton}>
+              <a href={profile.whatsapp} data-pulse-event="whatsapp_clicked" target="_blank" rel="noreferrer" className={quietButton}>
                 <MessageCircle size={16} aria-hidden />
                 WhatsApp
               </a>
@@ -296,7 +296,7 @@ export default function Home() {
               <CopyEmail email={profile.email} />
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a href={profile.whatsapp} target="_blank" rel="noreferrer" className={lightButton}>
+              <a href={profile.whatsapp} data-pulse-event="whatsapp_clicked" target="_blank" rel="noreferrer" className={lightButton}>
                 <MessageCircle size={16} aria-hidden />
                 WhatsApp
               </a>
@@ -308,7 +308,7 @@ export default function Home() {
                 <GitHubIcon size={16} />
                 GitHub
               </a>
-              <a href={profile.cv} target="_blank" rel="noreferrer" className={darkButton}>
+              <a href={profile.cv} data-pulse-event="cv_downloaded" target="_blank" rel="noreferrer" className={darkButton}>
                 <FileText size={16} aria-hidden />
                 View CV
               </a>

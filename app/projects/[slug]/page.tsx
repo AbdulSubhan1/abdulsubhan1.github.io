@@ -279,6 +279,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </Link>
             <a
               href={profile.whatsapp}
+              data-pulse-event="whatsapp_clicked"
               target="_blank"
               rel="noreferrer"
               className="group flex min-w-0 items-center gap-4 rounded-2xl bg-night p-5 text-white transition-colors hover:bg-ink"
