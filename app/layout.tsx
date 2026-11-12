@@ -12,11 +12,11 @@ const plexArabic = IBM_Plex_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
-  title: "Abdul Subhan | Frontend and full-stack engineer",
+  title: "Abdul Subhan | Frontend-focused full-stack engineer",
   description:
-    "Frontend and full-stack engineer shipping bilingual (English and Arabic) Next.js products for insurtech in the UAE and Bahrain: purchase journeys, CRMs with role-based access, and AI developer tooling.",
+    "Frontend-focused full-stack engineer building bilingual (English and Arabic) Next.js products for insurtech in the UAE and Bahrain: purchase journeys, CRMs with role-based access, and AI developer tooling.",
   openGraph: {
-    title: "Abdul Subhan | Frontend and full-stack engineer",
+    title: "Abdul Subhan | Frontend-focused full-stack engineer",
     description: "Bilingual Next.js products for the UAE and Bahrain: purchase journeys, CRMs and AI tooling.",
     url: "https://abdulsubhan1.github.io",
     images: ["/policydesk-dashboard.webp"],

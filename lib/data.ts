@@ -1,9 +1,9 @@
 export const profile = {
   name: "Abdul Subhan",
-  role: "Frontend and full-stack engineer",
-  headline: "I build web and mobile products end to end, from the first screen to the API behind it.",
+  role: "Frontend-focused full-stack engineer",
+  headline: "I build the web apps people pay through, in English and Arabic.",
   intro:
-    "Shipping React, Next.js and Node.js products since 2021: online purchase journeys, enterprise dashboards, a food delivery app, content sites that rank, and the AI tools that help teams ship. In English and Arabic.",
+    "Five years of React, Next.js and Node.js. At InsuranceMarket.ae I built quote-to-payment journeys for 8 insurance products in the UAE. On my own I built a website, a CRM and a payment gateway that run one live journey together.",
   location: "Karachi, Pakistan",
   availability: "Available now: remote, GCC relocation or Karachi hybrid",
   email: "abdul.subhan.durrani@gmail.com",
@@ -13,30 +13,17 @@ export const profile = {
   cv: "/Abdul-Subhan-CV.pdf",
 };
 
-/** The story on the home page; highlighted parts light up in the brand colour as you scroll. */
-export const story: { text: string; highlight?: boolean }[] = [
-  { text: "I started in 2021 building UI modules as an intern. Since then I've built" },
-  { text: "a food delivery app", highlight: true },
-  { text: "for customers, vendors and riders," },
-  { text: "ERP dashboards", highlight: true },
-  { text: "for enterprise teams, and at InsuranceMarket.ae" },
-  { text: "the journeys people buy insurance through,", highlight: true },
-  { text: "in English and Arabic. I own a feature from the first conversation to production, and lately I also build" },
-  { text: "the AI tools", highlight: true },
-  { text: "that help a team ship it." },
-];
-
-/** Real numbers from shipped work, each with what it counts. */
-export const stats: { value: string; label: string }[] = [
-  { value: "8", label: "insurance products customers buy online through flows I built" },
-  { value: "130+", label: "pages shipped in three months through an AI page pipeline I worked on" },
-  { value: "30+", label: "insurance covers served by one config-driven form system" },
-  { value: "2021", label: "the year I shipped my first production UI" },
+/** The company work on the home page: one real number each, pointing at the case study behind it. */
+export const workHighlights: { value: string; label: string; slug: string }[] = [
+  { value: "8", label: "insurance products customers buy online through journeys I built", slug: "insurance-purchase-journeys" },
+  { value: "130+", label: "pages shipped in three months through an AI page pipeline I worked on", slug: "page-generation" },
+  { value: "139", label: "working URLs in the English and Arabic website, in a sitemap I rebuilt from its routes", slug: "seo-content-platform" },
+  { value: "94 → 29", label: "CRM permission codes after I moved it to role-based access", slug: "bahrain-website-and-crm" },
 ];
 
 export const experience: { role: string; company: string; period: string; summary: string; projects?: string[] }[] = [
   {
-    role: "Frontend and full-stack engineer",
+    role: "Frontend-focused full-stack engineer",
     company: "InsuranceMarket.ae (Alfred Holdings)",
     period: "Mar 2024 – Nov 2026",
     summary: "Insurtech for the UAE and Bahrain: purchase journeys, a business insurance platform, content sites, a CRM and AI tooling.",
