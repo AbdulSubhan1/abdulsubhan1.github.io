@@ -13,9 +13,19 @@ export type ProjectIcon =
   | "puzzle"
   | "card"
   | "scan"
-  | "car";
+  | "car"
+  | "review";
 
 export type Shot = { src: string; alt: string; width: number; height: number };
+
+/** One step of a "How it works" diagram. `stop` is what happens when this check ends the run early. */
+export type FlowStep = {
+  title: string;
+  detail: string;
+  stop?: { title: string; detail: string };
+  /** Two possible endings shown side by side, the good one first. */
+  outcomes?: [{ title: string; detail: string }, { title: string; detail: string }];
+};
 
 export type Project = {
   slug: string;
@@ -42,6 +52,14 @@ export type Project = {
   bilingualDemo?: boolean;
   /** Part of the Brokwise → PolicyDesk → PaySandbox journey; shows how the three connect. */
   connected?: boolean;
+  /** A designed project that isn't built yet: the page says so and reads as a design, not a shipped product. */
+  design?: boolean;
+  /** A step-by-step diagram of how it works. */
+  flow?: { steps: FlowStep[]; note?: string };
+  /** Example messages a user would see, to make the flow concrete. */
+  samples?: { when: string; text: string }[];
+  /** How someone would add it to their own setup. */
+  setup?: { steps: string[]; snippet: string };
 };
 
 export const PROJECTS: Project[] = [
@@ -423,6 +441,125 @@ export const PROJECTS: Project[] = [
       "Contributions to a multi-agent delivery pipeline: spec, plan, implementation, QA, security and performance review, then PR",
     ],
     approach: ["Changes always go through a preview and a pull request, so a person reviews what the AI wrote before it ships"],
+  },
+  {
+    slug: "firstpass",
+    title: "FirstPass",
+    category: "Developer tool · design",
+    icon: "review",
+    summary: "The design for an AI agent that gives every pull request a first review the moment you're asked to look at it.",
+    where: "Personal project",
+    period: "2026",
+    role: "Design and architecture",
+    stack: ["GitHub Actions", "TypeScript", "Vercel AI SDK", "Zod"],
+    design: true,
+    problem:
+      "On a busy team, pull requests wait hours for a first look, and the first round of comments is nearly always the same: a repo rule that was missed, a leftover console.log, a merge conflict. The reviewer's time goes on things a machine could catch. FirstPass does that first pass the moment you are asked to review, so you open the PR to make the real call instead of pointing out the basics.",
+    built: [
+      "Starts when its owner is requested as a reviewer, when anyone comments /review on the PR, or when a re-review is requested after fixes",
+      "Skips sync and release PRs (main → develop and develop → main), and asks the author to fix merge conflicts before it reviews anything",
+      "Reviews the diff against the repo's own rules in AGENTS.md or CLAUDE.md and comments on the exact lines, each with a suggested fix",
+      "Approves only when it finds nothing at all; one finding means it requests changes",
+      "Posts a \"reviewing\" status when it starts and a ✅ or 🔴 summary when it ends, with lines reviewed and time taken, on the PR and optionally in Discord or Slack",
+      "A weekly digest: PRs reviewed, how many were approved on the first try, and badges such as the Zero Comments Club",
+    ],
+    flow: {
+      steps: [
+        {
+          title: "Triggered",
+          detail: "The owner is requested as a reviewer, someone comments /review, or a re-review is requested after fixes. Anything else is ignored.",
+        },
+        {
+          title: "Post a \"reviewing\" status",
+          detail: "One comment on the PR, plus an optional Discord or Slack message, so the author knows it has started. Later updates edit this comment instead of adding new ones.",
+        },
+        {
+          title: "Is it a sync or release PR?",
+          detail: "The base and head branches are checked: main → develop and develop → main are merges of work that was already reviewed.",
+          stop: { title: "Skip", detail: "Updates the status to say why, with no AI call" },
+        },
+        {
+          title: "Does it have merge conflicts?",
+          detail: "GitHub's mergeable state is read before anything else, because the diff of a conflicted PR is not what will be merged.",
+          stop: { title: "Ask the author to fix them", detail: "Stops here; requesting a review again starts a fresh run" },
+        },
+        {
+          title: "Gather the context",
+          detail: "The diff, through the API, without checking out or running the PR's code. The repo's AGENTS.md or CLAUDE.md. Lockfiles, build output and generated files are left out.",
+        },
+        {
+          title: "AI review",
+          detail: "A free model picked by environment variables (Gemini or Groq) reads the rules and the diff, and returns findings in a fixed shape that's checked with Zod: file, line, problem and suggested fix. Large PRs are reviewed file by file to stay inside free-tier limits.",
+        },
+        {
+          title: "Comment on the exact lines",
+          detail: "Findings whose line isn't really part of the diff are dropped. The rest go out as one GitHub review, each one an inline comment with a suggested change the author can apply in one click.",
+        },
+        {
+          title: "Verdict",
+          detail: "The code counts the findings and decides. The model never chooses the verdict, so text inside a PR can't talk it into approving.",
+          outcomes: [
+            { title: "Zero findings: approve", detail: "\"✅ Approved, no notes.\"" },
+            { title: "Any finding: request changes", detail: "\"🔴 3 things to fix.\"" },
+          ],
+        },
+        {
+          title: "Final summary",
+          detail: "The status comment becomes the summary: verdict, lines reviewed, time taken and a link to the review, sent to Discord or Slack too.",
+        },
+      ],
+      note: "Alongside: once a week a scheduled run counts the agent's reviews from the GitHub API and posts the digest, so no database is needed.",
+    },
+    samples: [
+      { when: "When it starts", text: "⏳ Reviewing #42. Grabbing the diff and the house rules, back in a minute." },
+      { when: "When there are conflicts", text: "⚠️ #42 has merge conflicts with develop. Please fix them and request a review again." },
+      { when: "Approved", text: "✅ #42 approved. No notes. 🏅 Zero Comments Club · 23 changed lines reviewed in 44s" },
+      { when: "Changes needed", text: "🔴 #42: 3 things to fix, see the comments on the lines. 117 changed lines reviewed in 1m 11s" },
+      { when: "Weekly digest", text: "📊 This week: 9 PRs reviewed, 4 approved on the first try 🏆. Longest clean streak: 3 in a row 🔥" },
+    ],
+    approach: [
+      "Triggered by asking a person, not a bot: GitHub doesn't let an ordinary bot be picked as a reviewer, so the agent listens for review requests sent to its owner. The team keeps its usual habit of tagging a reviewer",
+      "Cheap checks before the AI: release PRs and conflicts are caught first, so no AI call or free-tier quota is spent on a PR that can't be reviewed yet",
+      "The repo's own rules, not generic advice: reading AGENTS.md or CLAUDE.md makes comments match how that team writes code, and every repo can tune it by editing one file",
+      "Approve only on zero findings: a strict bar keeps \"approved\" meaningful, and the verdict comes from code, not from the model",
+      "Any free AI, set by environment variables: the same approach as JobFit, so switching from Gemini to Groq needs no code change",
+      "A GitHub Action rather than a server: GitHub runs it for free on public repos, and the built-in token can comment and review, so there's nothing to host or pay for",
+      "Safe with untrusted PRs: it reads the diff as data and never runs the PR's code, so a pull request can't run anything inside the workflow",
+      "A first pass, not a gate: it doesn't build or run the app. A person still makes the final call",
+    ],
+    setup: {
+      steps: [
+        "Get a free AI key (for example from Google AI Studio for Gemini) and add it to the repo as a secret named AI_API_KEY",
+        "Add the workflow below as .github/workflows/firstpass.yml, with your own GitHub username as the reviewer",
+        "Write the repo's rules in AGENTS.md (or CLAUDE.md), then open a PR and request yourself as a reviewer",
+      ],
+      snippet: `name: FirstPass
+on:
+  pull_request:
+    types: [review_requested]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    if: >
+      github.event.requested_reviewer.login == 'AbdulSubhan1' ||
+      (github.event.issue.pull_request && startsWith(github.event.comment.body, '/review'))
+    uses: AbdulSubhan1/firstpass/.github/workflows/review.yml@v1
+    with:
+      ai-provider: google        # or groq
+    secrets:
+      AI_API_KEY: \${{ secrets.AI_API_KEY }}
+      NOTIFY_WEBHOOK: \${{ secrets.DISCORD_WEBHOOK }}   # optional`,
+    },
+    result: [
+      "Designed: triggers, the review flow, the messages and the setup are worked out",
+      "Next: build it as a reusable GitHub Action and run it on my own repos (PolicyDesk, PaySandbox, JobFit and Brokwise)",
+    ],
   },
   {
     slug: "erp-dashboards",
