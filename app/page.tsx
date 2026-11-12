@@ -28,7 +28,7 @@ const RANGE: { icon: LucideIcon; title: string; example: string; slug: string }[
   { icon: SquareMousePointer, title: "Web apps", example: "Insurance purchase journeys", slug: "insurance-purchase-journeys" },
   { icon: LayoutDashboard, title: "Dashboards", example: "ERP for enterprise clients", slug: "erp-dashboards" },
   { icon: Smartphone, title: "Mobile apps", example: "Three-role food delivery app", slug: "food-delivery-app" },
-  { icon: Search, title: "Content and SEO", example: "A 270+ page site that ranks", slug: "seo-content-platform" },
+  { icon: Search, title: "Content at scale", example: "130+ pages through an AI pipeline", slug: "page-generation" },
   { icon: Plug, title: "APIs and payments", example: "A payment gateway with webhooks", slug: "paysandbox" },
   { icon: Bot, title: "AI products", example: "CV matching with private AI", slug: "jobfit" },
 ];

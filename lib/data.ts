@@ -29,7 +29,7 @@ export const story: { text: string; highlight?: boolean }[] = [
 /** Real numbers from shipped work, each with what it counts. */
 export const stats: { value: string; label: string }[] = [
   { value: "8", label: "insurance products customers buy online through flows I built" },
-  { value: "270+", label: "pages on a content site built for search and speed" },
+  { value: "130+", label: "pages shipped in three months through an AI page pipeline I worked on" },
   { value: "30+", label: "insurance covers served by one config-driven form system" },
   { value: "2021", label: "the year I shipped my first production UI" },
 ];
@@ -40,7 +40,15 @@ export const experience: { role: string; company: string; period: string; summar
     company: "InsuranceMarket.ae (Alfred Holdings)",
     period: "Mar 2024 – Nov 2026",
     summary: "Insurtech for the UAE and Bahrain: purchase journeys, a business insurance platform, content sites, a CRM and AI tooling.",
-    projects: ["insurance-purchase-journeys", "business-insurance-platform", "seo-content-platform", "bahrain-website-and-crm", "ai-developer-tooling"],
+    projects: [
+      "insurance-purchase-journeys",
+      "business-insurance-platform",
+      "seo-content-platform",
+      "page-generation",
+      "seo-plugin",
+      "bahrain-website-and-crm",
+      "ai-developer-tooling",
+    ],
   },
   {
     role: "Frontend Engineer",
