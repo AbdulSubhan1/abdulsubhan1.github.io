@@ -18,6 +18,17 @@ export type ProjectIcon =
 
 export type Shot = { src: string; alt: string; width: number; height: number };
 
+/** A recorded walkthrough of a live app, in public/: captions are part of the video, there is no sound. */
+export type Video = { src: string; poster: string; title: string; duration: string };
+
+/** The whole Brokwise → PolicyDesk → PaySandbox journey in one recording, shown on the home page. */
+export const JOURNEY_VIDEO: Video = {
+  src: "/videos/journey.mp4",
+  poster: "/videos/journey-poster.webp",
+  title: "One journey, three apps: a customer buys car insurance online",
+  duration: "2:57",
+};
+
 /** One step of a "How it works" diagram. `stop` is what happens when this check ends the run early. */
 export type FlowStep = {
   title: string;
@@ -43,6 +54,8 @@ export type Project = {
   links?: { live?: string; code?: string; site?: string };
   cover?: Shot;
   gallery?: Shot[];
+  /** A walkthrough video, shown above the screenshots. */
+  video?: Video;
   problem: string;
   built: string[];
   /** How it was built: the decisions worth explaining in an interview. */
@@ -76,6 +89,12 @@ export const PROJECTS: Project[] = [
     links: {
       live: "https://policydesk-opal.vercel.app/login",
       code: "https://github.com/AbdulSubhan1/policydesk",
+    },
+    video: {
+      src: "/projects/policydesk/demo.mp4",
+      poster: "/projects/policydesk/demo-poster.webp",
+      title: "PolicyDesk walkthrough: roles, leads, a paid website lead, KYC and Arabic",
+      duration: "2:23",
     },
     cover: {
       src: "/policydesk-lead.webp",
@@ -179,6 +198,12 @@ export const PROJECTS: Project[] = [
     role: "Design, frontend, integration and deployment",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     links: { live: "https://brokwise.vercel.app" },
+    video: {
+      src: "/projects/brokwise/demo.mp4",
+      poster: "/projects/brokwise/demo-poster.webp",
+      title: "Brokwise walkthrough: the forms, prices from your answers, and review and pay",
+      duration: "2:14",
+    },
     cover: {
       src: "/projects/brokwise/home.webp",
       alt: "Brokwise home page: \"Insurance, the wise way\", with car insurance open and other lines coming soon",

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DemoVideo } from "@/components/demo-video";
 import { DirectionDemo } from "@/components/direction-demo";
 import { FlowDiagram } from "@/components/flow-diagram";
 import { ProductFlow } from "@/components/product-flow";
@@ -71,6 +72,9 @@ function Points({ items }: { items: string[] }) {
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const project = projectBySlug((await params).slug);
   if (!project) notFound();
+
+  // When a video leads the page, its cover screenshot moves down with the other screens
+  const screens = [...(project.video && project.cover ? [project.cover] : []), ...(project.gallery ?? [])];
 
   const index = PROJECTS.indexOf(project);
   const next = PROJECTS[(index + 1) % PROJECTS.length];
@@ -165,10 +169,16 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             )}
           </header>
 
-          {project.cover && (
+          {project.video ? (
             <div className="mx-auto max-w-6xl px-4 md:px-6">
-              <Screenshot shot={project.cover} />
+              <DemoVideo video={project.video} />
             </div>
+          ) : (
+            project.cover && (
+              <div className="mx-auto max-w-6xl px-4 md:px-6">
+                <Screenshot shot={project.cover} />
+              </div>
+            )
           )}
 
           <div className="mx-auto max-w-6xl px-4 pt-12 pb-8 md:px-6">
@@ -242,10 +252,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <Points items={project.result} />
               </Section>
             )}
-            {project.gallery && (
+            {screens.length > 0 && (
               <Section title="More screens">
                 <div className="grid gap-8">
-                  {project.gallery.map((shot) => (
+                  {screens.map((shot) => (
                     <Screenshot key={shot.src} shot={shot} caption={shot.alt} />
                   ))}
                 </div>
