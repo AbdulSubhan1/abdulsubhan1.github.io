@@ -204,7 +204,10 @@ export const PROJECTS: Project[] = [
     period: "2026",
     role: "Design, frontend, integration and deployment",
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
-    links: { live: "https://brokwise.vercel.app" },
+    links: {
+      live: "https://brokwise.vercel.app",
+      code: "https://github.com/AbdulSubhan1/brokwise",
+    },
     video: {
       src: "/projects/brokwise/demo.mp4",
       poster: "/projects/brokwise/demo-poster.webp",
