@@ -195,6 +195,54 @@ export const PROJECTS: Project[] = [
     connected: true,
   },
   {
+    slug: "regread",
+    title: "RegRead",
+    category: "AI web app",
+    icon: "car",
+    summary: "Upload a photo of a car registration card and get clean, checked car details, with rules per country so the AI's mistakes don't slip through.",
+    where: "Personal project",
+    period: "2026",
+    role: "Design, frontend, AI integration and deployment",
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel AI SDK", "Gemini", "Zod", "Upstash Redis", "Tesseract.js", "Playwright"],
+    links: {
+      live: "https://regread.vercel.app",
+      code: "https://github.com/AbdulSubhan1/regread",
+    },
+    cover: {
+      src: "/projects/regread/home.webp",
+      alt: "RegRead home page: \"Read a car registration card in seconds\", with an upload box and made-up sample cards",
+      width: 2880,
+      height: 1800,
+    },
+    gallery: [
+      {
+        src: "/projects/regread/result.webp",
+        alt: "A made-up Saudi card photographed off a screen, read into make, model, year, VIN, plate and a Hijri date converted to 2023-07-28",
+        width: 2880,
+        height: 1800,
+      },
+    ],
+    problem:
+      "Car insurance forms ask for the make, model, year, chassis number, plate and registration date, and people copy them from their registration card by hand. They get them wrong: an O for a 0 in the VIN, a plate in the wrong format, a Saudi date in the Hijri calendar.",
+    built: [
+      "Upload a photo or PDF of a UAE, Pakistan, Saudi or Qatar registration card, or try one of 16 made-up sample cards",
+      "An AI vision model reads it into one fixed shape for every country, with a confidence per field and no field for the owner's personal details",
+      "Country rules check every field: emirate and city plates, 17-character VINs or Japanese frame numbers, model years, and Hijri dates converted to Gregorian",
+      "A value that fails a rule is left empty with a plain reason; an unsure one says \"Please check this one\"; the visitor edits and confirms before anything is used",
+      "Brokwise's car form uses it: \"Scan your registration card\" fills the make, model and year",
+    ],
+    approach: [
+      "Countries are data, not code: each is one file of plate patterns, chassis rules and calendars, and the same checker runs on the server, in the browser when the country changes, and again on confirm",
+      "A wrong value never looks checked: only fields with a format rule can show a tick, and a rejected value is never put back",
+      "Runs on the free Gemini tier with a daily limit per visitor and for the whole app, cached results for the sample cards, and on-device OCR when the AI is unavailable",
+      "Images are read in memory and never stored; sites that may call it are on an allow list",
+    ],
+    result: [
+      "Live on Vercel; 112 of 112 fields right on the 16 sample cards, including blurry, tilted and photo-of-a-screen ones",
+      "175 unit tests, including the Hijri conversion and the frame-number rule",
+    ],
+  },
+  {
     slug: "brokwise",
     title: "Brokwise",
     category: "Website",
@@ -235,6 +283,7 @@ export const PROJECTS: Project[] = [
       "Every form creates records in PolicyDesk through its private website API, which assigns a coordinator automatically",
       "Plans and prices come from PolicyDesk, and the chosen plan is saved there as a quote",
       "Payment opens PaySandbox's hosted checkout; once the webhook arrives, the thank-you page shows the paid order and the advisor assigned",
+      "\"Scan your registration card\" on the car form fills the make, model and year from a photo through RegRead, my card-reading app",
     ],
     approach: [
       "The website has no database: every call to PolicyDesk is a signed server-to-server request, and the visitor's progress is kept in a signed, http-only cookie",
